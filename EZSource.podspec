@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of EZSource.'
+  s.summary          = 'Declarative Datasource/Delegate for TableView'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  This library helps to avoid boilerplate code when operating with TableView. Just create Rows add them
+  to sections. Append Headers/Footers to sections and use reload or updateWithAnimation
                        DESC
 
   s.homepage         = 'https://github.com/aldo-dev/EZSource.git'
@@ -27,6 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/aldo-dev/EZSource.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
+  s.swift_version   = '4.0'
 
   s.source_files = 'EZSource/Classes/**/*'
 
