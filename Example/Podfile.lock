@@ -1,0 +1,16 @@
+PODS:
+  - EZSource (0.1.0)
+
+DEPENDENCIES:
+  - EZSource (from `../`)
+
+EXTERNAL SOURCES:
+  EZSource:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EZSource: 4b5e64531dd5b5d04d32288fb0134f4f882dd501
+
+PODFILE CHECKSUM: de1d2ffa3677c9ec60afe5510e611c72178345cb
+
+COCOAPODS: 1.5.0

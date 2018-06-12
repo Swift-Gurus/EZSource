@@ -1,0 +1,6 @@
+framework module Pods_EZSource_Tests {
+  umbrella header "Pods-EZSource_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
