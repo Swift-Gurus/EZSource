@@ -1,22 +1,28 @@
 {
   "name": "EZSource",
-  "version": "0.1.0",
-  "summary": "A short description of EZSource.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/AlexHmelevskiAG/EZSource",
+  "version": "0.1.1",
+  "summary": "Declarative Datasource/Delegate for TableView",
+  "description": "This library helps to avoid boilerplate code when operating with TableView. Just create Rows add them\nto sections. Append Headers/Footers to sections and use reload or updateWithAnimation",
+  "homepage": "https://github.com/aldo-dev/EZSource.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "AlexHmelevskiAG": "alexei.hmelevski@gmail.com"
+    "ALDO Inc": "aldodev@aldogroup.com"
   },
   "source": {
-    "git": "https://github.com/AlexHmelevskiAG/EZSource.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/aldo-dev/EZSource.git",
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "11.0"
   },
-  "source_files": "EZSource/Classes/**/*"
+  "swift_version": "4.0",
+  "source_files": "EZSource/Classes/**/*",
+  "dependencies": {
+    "SwiftyCollection": [
+
+    ]
+  }
 }

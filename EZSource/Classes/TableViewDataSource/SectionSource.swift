@@ -6,13 +6,12 @@
 //
 
 import Foundation
+import SwiftyCollection
 
 class SectionSource {
     
     var sections: [Sectionable] = []
-    var count: Int {
-        return sections.count
-    }
+    var count: Int { return sections.count }
     
     init() {}
     func section(at index: Int) -> Sectionable {
@@ -23,14 +22,11 @@ class SectionSource {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return sections[section].numberOfRows
+        return sections.element(at: section)?.numberOfRows ?? 0
     }
     
     func indexOfSection(_ section: Sectionable) -> Int? {
-       return sections.enumerated().reduce(nil) { (part, elementEnumerated) -> Int? in
-            return elementEnumerated.element.id == section.id ? elementEnumerated.offset : part
-          
-        }
+       return sections.index(where: { $0.id == section.id })
     }
     
     func update(with sections: [Sectionable]) {
@@ -38,16 +34,11 @@ class SectionSource {
             self.sections = sections
             return
         }
+        
         sections.forEach({ self.replace(section: $0)})
     }
     
     func replace(section: Sectionable) {
-        self.sections = self.sections.reduce([], { (partial, current) -> [Sectionable] in
-            if current.id == section.id {
-                return partial + [section]
-            } else {
-                return partial + [current]
-            }
-        })
+        self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
     }
 }

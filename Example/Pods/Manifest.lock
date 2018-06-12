@@ -1,15 +1,22 @@
 PODS:
-  - EZSource (0.1.0)
+  - EZSource (0.1.1):
+    - SwiftyCollection
+  - SwiftyCollection (1.0.0)
 
 DEPENDENCIES:
   - EZSource (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SwiftyCollection
 
 EXTERNAL SOURCES:
   EZSource:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EZSource: 4b5e64531dd5b5d04d32288fb0134f4f882dd501
+  EZSource: 369ef9277e5b49124314167945a107716731db51
+  SwiftyCollection: 7f708298ca501d0aa280e03b1d3e56b553ebabea
 
 PODFILE CHECKSUM: de1d2ffa3677c9ec60afe5510e611c72178345cb
 

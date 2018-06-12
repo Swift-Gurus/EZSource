@@ -1,10 +1,9 @@
 # EZSource
 
-[![CI Status](https://img.shields.io/travis/AlexHmelevskiAG/EZSource.svg?style=flat)](https://travis-ci.org/AlexHmelevskiAG/EZSource)
+[![CircleCI](https://circleci.com/gh/aldo-dev/mfind.svg?style=svg)](https://circleci.com/gh/aldo-dev/mfind)
 [![Version](https://img.shields.io/cocoapods/v/EZSource.svg?style=flat)](https://cocoapods.org/pods/EZSource)
 [![License](https://img.shields.io/cocoapods/l/EZSource.svg?style=flat)](https://cocoapods.org/pods/EZSource)
 [![Platform](https://img.shields.io/cocoapods/p/EZSource.svg?style=flat)](https://cocoapods.org/pods/EZSource)
-
 
 ## Usage
 
@@ -14,17 +13,14 @@ Should conform to the protocols `ReusableCell` and `Configurable`.
 final class StringCell: UITableViewCell, ReusableCell, Configurable {
 typealias Model = String
 
-func configure(with text: String) {
-textLabel?.text = text
-print(text)
-}
+    func configure(with text: String) {
+        textLabel?.text = text
+    }
 }
 ```
 - #### Source Initialization
 ```swift
-let source = TableViewDataSource(tableView: tableView,
-withTypes: [StringCell.self],
-reusableViews: [])
+let source = TableViewDataSource(tableView: tableView, withTypes: [StringCell.self], reusableViews: [])
 ```
 
 - #### Create Rows
@@ -38,6 +34,49 @@ var section = TableViewSection(id: "Test")
 section.addRows([row])
 source.reload(with: [section])
 ```
+
+## Advanced Usage
+
+#### Add Swipe actions to cells:
+- ##### Create Action
+```swift
+let action = RowAction { [weak self] in
+    let alertController = UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)
+    let act = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+        alertController.dismiss(animated: true, completion: nil)
+    
+    })
+    alertController.addAction(act)
+    self?.present(alertController, animated: true, completion: nil)
+}
+```
+- ##### Add Action to the Row as tralling or leading
+```swift
+row.addRowLeadingActions([action])
+row.addRowTrailingActions([action])
+```
+#### Add Headers/Footers to cells:
+- ##### Create a ReusableView 
+```swift
+final class TestReusableView: UITableViewHeaderFooterView, ReusableView, Configurable {
+
+    typealias Model = String
+
+    func configure(with txt: String) {
+        label.text = txt
+    }
+}
+```
+- ##### Create Header/Footer
+```swift
+let header = HeaderFooterProvider<String,TestReusableView>.init(model: "My String header")
+```
+- ##### Add Header/Footer
+```swift
+section.addHeader(header)
+section.addFooter(footer)
+```
+
 
 
 ## Example
