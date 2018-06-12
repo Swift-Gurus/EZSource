@@ -8,14 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Declarative Datasource/Delegate for TableView'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
   This library helps to avoid boilerplate code when operating with TableView. Just create Rows add them
@@ -31,5 +26,6 @@ Pod::Spec.new do |s|
   s.swift_version   = '4.0'
 
   s.source_files = 'EZSource/Classes/**/*'
+  s.dependency 'SwiftyCollection'
 
 end

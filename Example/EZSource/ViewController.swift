@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         
         var row = TableViewRow<String, StringCell>(model: "My Row")
        
-        let action = RowAction {[weak self] in
+        let action = RowAction { [weak self] in
             let alertController = UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)
             let act = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
                 alertController.dismiss(animated: true, completion: nil)

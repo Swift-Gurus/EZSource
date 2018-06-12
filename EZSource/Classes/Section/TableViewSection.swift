@@ -74,7 +74,12 @@ extension TableViewSection {
 extension TableViewSection {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return try! rows[indexPath.row].tableView(tableView, cellForRowAt: indexPath)
+        guard let cell = rows.element(at: indexPath.row).flatMap({ try? $0.tableView(tableView, cellForRowAt: indexPath) }) else {
+            let errorCell = UITableViewCell()
+            errorCell.textLabel?.text = "Couldn't dequeue cell at indexPath: \(indexPath)"
+            return errorCell
+        }
+        return cell
     }
     
     func headerView(forTableView tableView: UITableView) -> UIView? {
@@ -82,15 +87,15 @@ extension TableViewSection {
     }
     
     func traillingActionsForRow(at index: Int) -> [UIContextualAction] {
-        return rows[index].trailingContextualActions
+        return rows.element(at: index)?.trailingContextualActions ?? []
     }
     
     func leadingActionsForRow(at index: Int) -> [UIContextualAction] {
-        return rows[index].leadingContextualActions
+        return rows.element(at: index)?.leadingContextualActions ?? []
     }
     
     func tapOnRow(at index: Int) {
-        rows[index].didTap()
+        rows.element(at: index)?.didTap()
     }
 }
 
@@ -130,7 +135,6 @@ extension TableViewSection: AnimatableSection {
     }
 }
 
-
 public protocol Identifiable {
     var id: String { get }
 }
@@ -148,7 +152,6 @@ protocol Sectionable: Identifiable {
     func tapOnRow(at index: Int)
 }
 
-
 // MARK: - AnimatableSection
 public protocol AnimatableSection {
     var animationConfig: AnimationConfig { get }
@@ -156,5 +159,3 @@ public protocol AnimatableSection {
     func updateRows(in tableView: UITableView, at indexPaths: [IndexPath])
     func insertRows(in tableView: UITableView, at indexPaths: [IndexPath])
 }
-
-

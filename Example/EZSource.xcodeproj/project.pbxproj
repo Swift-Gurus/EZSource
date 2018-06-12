@@ -351,10 +351,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EZSource_Example/Pods-EZSource_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/EZSource/EZSource.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyCollection/SwiftyCollection.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSource.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyCollection.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

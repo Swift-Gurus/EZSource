@@ -1,0 +1,6 @@
+framework module SwiftyCollection {
+  umbrella header "SwiftyCollection-umbrella.h"
+
+  export *
+  module * { export * }
+}
