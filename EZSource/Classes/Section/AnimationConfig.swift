@@ -15,7 +15,7 @@ public struct AnimationConfig {
     let collapseAnimation: UITableViewRowAnimation
     let expandAnimation: UITableViewRowAnimation
     
-    init(deleteAnimation: UITableViewRowAnimation = .automatic,
+    public init(deleteAnimation: UITableViewRowAnimation = .automatic,
          insertAnimation: UITableViewRowAnimation = .automatic,
          updateAnimation: UITableViewRowAnimation = .automatic,
          collapseAnimation: UITableViewRowAnimation = .automatic,

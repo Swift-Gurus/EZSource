@@ -40,20 +40,24 @@ open class TableViewDataSource: NSObject  {
     
     public func collapseSection(_ section: TableViewSection, collapse: Bool) {
         guard let index = source.indexOfSection(section) else { return }
-        let new = section.collapsedCopy(collapse)
-        source.update(with: [new])
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
-                new.expandCollapseSection(in: self.tv, at: index)
+            let new = section.collapsedCopy(collapse)
+            self.source.update(with: [new])
+            new.expandCollapseSection(in: self.tv, at: index)
             }, completion: nil)
     }
 
     
     public func updateWithAnimation(updates: [UpdateInfo]) {
-        source.update(with: updates.map({$0.section}))
+        guard !source.sections.isEmpty else {
+            reload(with: updates.map({$0.section}))
+            return
+        }
         
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
+            self.source.update(with: updates.map({$0.section}))
             updates.forEach({ self.launchUpdates(in: self.tv, with: $0) })
         }, completion: nil)
     }
