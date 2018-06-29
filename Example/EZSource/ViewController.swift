@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 
     var tableView: UITableView!
     var source: TableViewDataSource!
+    var headers: [String: MutableHeaderFooterProvider<HeaderWithButtonModel, TestReusableViewWithButton>] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView(frame: .zero, style: .plain)
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
         action.title = "Done"
         action.backgroundColor = .green
         var section = TableViewSection(id: "Test")
-        let header = HeaderFooterProvider<String,TestReusableView>.init(model: "My String header")
+        let header = ImmutableHeaderFooterProvider<String,TestReusableView>.init(model: "My String header")
         section.addRows([row])
         section.addHeader(header)
         
@@ -59,9 +60,30 @@ class ViewController: UIViewController {
                                                             
         }
         
-        let headerButton = HeaderFooterProvider<HeaderWithButtonModel, TestReusableViewWithButton>(model: headerWithBottonModel)
+        let headerButton = MutableHeaderFooterProvider<HeaderWithButtonModel, TestReusableViewWithButton>(model: headerWithBottonModel)
         secondSection.addHeader(headerButton)
+        
+        headers[secondSection.id] = headerButton
+        
         source.reload(with: [secondSection,section])
+        
+        let newHeader = HeaderWithButtonModel(title: "My button Header \n MODIFIED",
+                                              buttonText: "Collapse",
+                                              collapsedText: "test") {
+                                                
+                                                self.source.collapseSection(secondSection, collapse: !self.source.isSectionCollapsed(secondSection))
+                                                
+        }
+
+        secondSection.addHeader(headerButton)
+        secondSection.addRows([row])
+        let updateInfo = UpdateInfo(section: secondSection, changes: TableViewUpdates(insertedIndexes: [IndexPath(row: 3, section: 0)]))
+    
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            self.source.updateWithAnimation(updates: [updateInfo])
+            self.headers[secondSection.id]?.update(withModel: newHeader)
+        }
+        
     }
 }
 
