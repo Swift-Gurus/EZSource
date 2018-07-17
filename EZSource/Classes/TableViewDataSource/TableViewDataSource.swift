@@ -27,9 +27,10 @@ open class TableViewDataSource: NSObject  {
     }
 
 
-    public func isSectionCollapsed(_ section: TableViewSection) -> Bool {
+    // if section exists this will return true or false otherwise nil
+    public func isSectionCollapsed(_ section: TableViewSection) -> Bool? {
         return source.indexOfSection(section).map({ source.section(at: $0) })
-                                             .map({$0.collapsed }) ?? false
+                                             .map({$0.collapsed })
 
     }
     
@@ -50,7 +51,7 @@ open class TableViewDataSource: NSObject  {
 
     
     public func updateWithAnimation(updates: [UpdateInfo]) {
-        guard !source.sections.isEmpty else {
+        guard !source.isEmpty else {
             reload(with: updates.map({$0.section}))
             return
         }
@@ -58,7 +59,8 @@ open class TableViewDataSource: NSObject  {
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             self.source.update(with: updates.map({$0.section}))
-            updates.forEach({ self.launchUpdates(in: self.tv, with: $0) })
+            updates.filter({!$0.section.collapsed})
+                   .forEach({ self.launchUpdates(in: self.tv, with: $0) })
         }, completion: nil)
     }
     

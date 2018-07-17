@@ -21,6 +21,11 @@ class SectionSource {
         return sections[index]
     }
     
+    var isEmpty: Bool {
+        return sections.map({$0.numberOfRows }).reduce(0, { $0 + $1 }) == 0
+    }
+
+    
     func numberOfRows(in section: Int) -> Int {
         return sections.element(at: section)?.numberOfRows ?? 0
     }
@@ -34,7 +39,6 @@ class SectionSource {
             self.sections = sections
             return
         }
-        
         sections.forEach({ self.replace(section: $0)})
     }
     
