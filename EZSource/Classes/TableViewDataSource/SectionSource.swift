@@ -22,7 +22,7 @@ class SectionSource {
     }
     
     var isEmpty: Bool {
-        return sections.map({$0.numberOfRows }).reduce(0, { $0 + $1 }) == 0
+        return sections.map({ $0.numberOfRows }).reduce(0, { $0 + $1 }) == 0
     }
 
     

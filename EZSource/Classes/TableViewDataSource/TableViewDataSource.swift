@@ -49,7 +49,6 @@ open class TableViewDataSource: NSObject  {
             }, completion: nil)
     }
 
-    
     public func updateWithAnimation(updates: [UpdateInfo]) {
         guard !source.isEmpty else {
             reload(with: updates.map({$0.section}))
@@ -59,7 +58,7 @@ open class TableViewDataSource: NSObject  {
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             self.source.update(with: updates.map({$0.section}))
-            updates.filter({!$0.section.collapsed})
+            updates.filter({ !$0.section.collapsed })
                    .forEach({ self.launchUpdates(in: self.tv, with: $0) })
         }, completion: nil)
     }
