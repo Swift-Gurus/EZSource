@@ -56,7 +56,7 @@ class ViewController: UIViewController {
                                                           buttonText: "Collapse",
                                                           collapsedText: "test") {
             
-            self.source.collapseSection(secondSection, collapse: !self.source.isSectionCollapsed(secondSection))
+            self.source.collapseSection(secondSection, collapse: !(self.source.isSectionCollapsed(secondSection) ?? false))
                                                             
         }
         
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
                                               buttonText: "Collapse",
                                               collapsedText: "test") {
                                                 
-                                                self.source.collapseSection(secondSection, collapse: !self.source.isSectionCollapsed(secondSection))
+                                                self.source.collapseSection(secondSection, collapse: !(self.source.isSectionCollapsed(secondSection) ?? false))
                                                 
         }
 
