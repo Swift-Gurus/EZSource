@@ -25,13 +25,12 @@ open class TableViewDataSource: NSObject  {
         
         reusableViews.forEach({ tableView.registerFooterHeader(reusableViewType: $0) })
     }
-
-
-    // if section exists this will return true or false otherwise nil
+    
+    
     public func isSectionCollapsed(_ section: TableViewSection) -> Bool? {
         return source.indexOfSection(section).map({ source.section(at: $0) })
-                                             .map({$0.collapsed })
-
+            .map({$0.collapsed })
+        
     }
     
     public func reload(with sections: [TableViewSection]) {
@@ -48,25 +47,43 @@ open class TableViewDataSource: NSObject  {
             new.expandCollapseSection(in: self.tv, at: index)
             }, completion: nil)
     }
-
+    
+    
+    public func updateVisibleSections(updates: [UpdateInfo]) {
+        
+    }
+    
     public func updateWithAnimation(updates: [UpdateInfo]) {
-        guard !source.isEmpty else {
+        guard !source.sections.isEmpty else {
             reload(with: updates.map({$0.section}))
             return
         }
         
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
-            self.source.update(with: updates.map({$0.section}))
-            updates.filter({ !$0.section.collapsed })
-                   .forEach({ self.launchUpdates(in: self.tv, with: $0) })
-        }, completion: nil)
+            self.source.update(withInfo: updates)
+            updates.filter({!$0.section.collapsed})
+                .forEach({ self.launchUpdates(in: self.tv, with: $0) })
+            
+            }, completion: nil)
     }
     
+    
     private func launchUpdates(in tableView: UITableView, with info : UpdateInfo) {
-        info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
-        info.section.updateRows(in: tableView, at: info.changes.updatedIndexes)
-        info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
+        
+        if !info.changes.deletedIndexes.isEmpty {
+            
+            info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
+        }
+        
+        if !info.changes.updatedIndexes.isEmpty {
+            info.section.updateRows(in: tableView, at: info.changes.updatedIndexes)
+        }
+        
+        if !info.changes.insertedIndexes.isEmpty {
+            info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
+        }
+        
     }
 }
 
@@ -74,10 +91,12 @@ open class TableViewDataSource: NSObject  {
 extension TableViewDataSource: UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
+        debugPrint("TableViewDataSource NUMBER OF SECTIONS: \(source.count)")
         return source.count
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        debugPrint("TableViewDataSource NUMBER OF ROWS at: \(section): \(source.numberOfRows(in: section))")
         return  source.numberOfRows(in: section)
     }
     
@@ -102,16 +121,16 @@ extension TableViewDataSource: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return  source.section(at: section)
-                      .headerProvider
-                      .map{ $0.height }
-                      .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+            .headerProvider
+            .map{ $0.height }
+            .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return source.section(at: section)
-                     .footerProvider
-                     .map{ $0.height }
-                     .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+            .footerProvider
+            .map{ $0.height }
+            .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

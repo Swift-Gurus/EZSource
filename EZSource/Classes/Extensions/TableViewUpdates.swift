@@ -7,16 +7,22 @@
 
 import Foundation
 
-public struct UpdateInfo {
+protocol SectionUpdateInfo {
+    var section: TableViewSection { get }
+    var changes: TableViewUpdates { get }
+}
+
+public struct UpdateInfo: SectionUpdateInfo {
     public let section: TableViewSection
     public let changes: TableViewUpdates
-
+    
     public init(section: TableViewSection,
                 changes: TableViewUpdates) {
         self.section = section
         self.changes = changes
     }
 }
+
 
 public struct TableViewUpdates {
     public let deletedIndexes: [IndexPath]
