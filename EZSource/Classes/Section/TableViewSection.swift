@@ -139,7 +139,7 @@ extension TableViewSection: AnimatableSection {
     func updated(with cellItem: CellProvider?,
                  deletedIndex: Int? = nil,
                  updatedIndex: Int? = nil,
-                 addedIndex: Int? = nil) -> Sectionable {
+                 addedIndex: Int? = nil) -> TableViewSection {
         var mSelf = self
         
         if let deletedIndex = deletedIndex {
@@ -188,12 +188,14 @@ protocol Sectionable: Identifiable {
     var headerProvider: SectionHeaderFooterProvider? { get }
     var footerProvider: SectionHeaderFooterProvider? { get }
     var collapsed: Bool { get }
+    func collapsedCopy(_ flag: Bool) -> Self
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     func traillingActionsForRow(at index: Int) -> [UIContextualAction]
     func leadingActionsForRow(at index: Int) -> [UIContextualAction]
     func headerView(forTableView: UITableView) -> UIView?
     func tapOnRow(at index: Int)
-    func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Sectionable
+    func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Self
+    func expandCollapseSection(in tableView: UITableView, at index: Int)
 }
 
 // MARK: - AnimatableSection

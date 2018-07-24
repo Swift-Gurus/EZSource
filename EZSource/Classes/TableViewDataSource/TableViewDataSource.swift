@@ -42,7 +42,7 @@ open class TableViewDataSource: NSObject  {
         guard let index = source.indexOfSection(section) else { return }
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
-            let new = section.collapsedCopy(collapse)
+            let new = source.sections[index].collapsedCopy(collapse)
             self.source.update(with: [new])
             new.expandCollapseSection(in: self.tv, at: index)
             }, completion: nil)
@@ -91,12 +91,10 @@ open class TableViewDataSource: NSObject  {
 extension TableViewDataSource: UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        debugPrint("TableViewDataSource NUMBER OF SECTIONS: \(source.count)")
         return source.count
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        debugPrint("TableViewDataSource NUMBER OF ROWS at: \(section): \(source.numberOfRows(in: section))")
         return  source.numberOfRows(in: section)
     }
     
