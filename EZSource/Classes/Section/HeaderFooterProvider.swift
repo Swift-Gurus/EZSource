@@ -15,13 +15,13 @@ protocol SectionHeaderFooterProvider  {
 }
 
 
-public class HeaderFooterProvider<T,C>: SectionHeaderFooterProvider where C: Configurable & ReusableView, C.Model == T  {
+public class HeaderFooterProvider<View>: SectionHeaderFooterProvider where View: Configurable & ReusableView {
     var title: String?
     
-    let model: T
+    let model: View.Model
     let height: CGFloat?
     
-    public init(model: T, height: CGFloat? = nil) {
+    public init(model: View.Model, height: CGFloat? = nil) {
         self.model = model
         self.height = height
     }
@@ -32,30 +32,30 @@ public class HeaderFooterProvider<T,C>: SectionHeaderFooterProvider where C: Con
     
 }
 
-public class ImmutableHeaderFooterProvider<T,C>: HeaderFooterProvider<T,C> where C: Configurable & ReusableView, C.Model == T   {
+public class ImmutableHeaderFooterProvider<View>: HeaderFooterProvider<View> where View: Configurable & ReusableView  {
     
     public override func headerView(forTableView tableView: UITableView) -> UIView? {
-        let view: C = tableView.dequeueView()
+        let view: View = tableView.dequeueView()
         view.configure(with: model)
         return view.uiView
     }
     
 }
 
-public class MutableHeaderFooterProvider<T,C>: HeaderFooterProvider<T,C> where C: Configurable & ReusableView, C.Model == T  {
+public class MutableHeaderFooterProvider<View>: HeaderFooterProvider<View> where View: Configurable & ReusableView {
     
-    private var _cachedView: C?
-    private var _lastModel: T?
+    private var _cachedView: View?
+    private var _lastModel: View.Model?
     public override func headerView(forTableView tableView: UITableView) -> UIView? {
         guard _cachedView == nil else { return   _cachedView?.uiView }
         
-        let view: C = tableView.dequeueView()
+        let view: View = tableView.dequeueView()
         view.configure(with: _lastModel ?? model)
         _cachedView = view
         return view.uiView
     }
     
-    public func update(withModel model: T) {
+    public func update(withModel model: View.Model) {
         _lastModel = model
         _cachedView?.configure(with: model)
     }

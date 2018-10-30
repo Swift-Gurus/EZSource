@@ -11,17 +11,18 @@ import Foundation
 import XCTest
 
 final class TableViewRowTester {
-    var row: TableViewRow<String, MockReusableCell>
+    var row: TableViewRow<MockReusableCell>
     var action: RowAction!
     var actionTester = RowActionTester()
     init() {
-        row = TableViewRow<String, MockReusableCell>(model: "test")
+        row = TableViewRow<MockReusableCell>(model: "test")
         actionTester = RowActionTester()
     }
     
     func createAction() {
         action = RowAction(action: {})
         action.title = "TEST"
+        action.backgroundColor = .red
     }
     
     func addIntoLeadingActions() {

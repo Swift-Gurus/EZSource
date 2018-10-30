@@ -29,15 +29,15 @@ public struct TableViewSection: Sectionable {
 
 // MARK: - Mutating Methods
 extension TableViewSection {
-    public mutating func addRows<T,C>(_ rows: [TableViewRow<T,C>]) where C: Configurable & ReusableCell, C.Model == T {
+    public mutating func addRows<Cell>(_ rows: [TableViewRow<Cell>]) where Cell: Configurable & ReusableCell {
         self.rows.append(contentsOf: rows)
     }
     
-    public mutating func addHeader<T,C>(_ header: HeaderFooterProvider<T,C>) where C: Configurable & ReusableView, C.Model == T {
+    public mutating func addHeader<View>(_ header: HeaderFooterProvider<View>) where View: Configurable & ReusableView {
         headerProvider = header
     }
     
-    public mutating func addFooter<T,C>(_ footer: HeaderFooterProvider<T,C>) where C: Configurable & ReusableView, C.Model == T {
+    public mutating func addFooter<View>(_ footer: HeaderFooterProvider<View>) where View: Configurable & ReusableView {
         footerProvider = footer
     }
 }
@@ -45,19 +45,19 @@ extension TableViewSection {
 // MARK: - Immutable Methods
 extension TableViewSection {
     
-    public func addedRows<T,C>(_ rows: [TableViewRow<T,C>]) -> TableViewSection where C: Configurable & ReusableCell, C.Model == T  {
+    public func addedRows<Cell>(_ rows: [TableViewRow<Cell>]) -> TableViewSection where Cell: Configurable & ReusableCell {
         var newSection = TableViewSection(id: id)
         newSection.addRows(rows)
         return newSection
     }
     
-    public func addedHeader<T,C>(_ header: HeaderFooterProvider<T,C>) -> TableViewSection where C: Configurable & ReusableView, C.Model == T {
+    public func addedHeader<View>(_ header: HeaderFooterProvider<View>) -> TableViewSection where View: Configurable & ReusableView {
         var currentSection = self
         currentSection.addHeader(header)
         return currentSection
     }
     
-    public func addedFooter<T,C>(_ footer: HeaderFooterProvider<T,C>) -> TableViewSection where C: Configurable & ReusableView, C.Model == T {
+    public func addedFooter<View>(_ footer: HeaderFooterProvider<View>) -> TableViewSection where View: Configurable & ReusableView {
         var currentSection = self
         currentSection.addFooter(footer)
         return currentSection

@@ -23,16 +23,16 @@ protocol CellDequeuer {
 }
 
 
-public struct TableViewRow<T,C>: CellProvider where C: Configurable & ReusableCell, C.Model == T  {
-    let model: T
-    let onTap: ((T) -> Void)?
+public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
+    let model: Cell.Model
+    let onTap: ((Cell.Model) -> Void)?
     var traillingActions: [RowAction] = []
     var leadingActions: [RowAction] = []
     
-    public init(model: T,
+    public init(model: Cell.Model,
                 traillingActions: [RowAction] = [],
                 leadingActions: [RowAction] = [],
-                onTap: ((T) -> Void)? = nil) {
+                onTap: ((Cell.Model) -> Void)? = nil) {
         self.model = model
         self.onTap = onTap
         self.traillingActions = traillingActions
@@ -40,7 +40,7 @@ public struct TableViewRow<T,C>: CellProvider where C: Configurable & ReusableCe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell {
-        let cell: C = tableView.dequeueCell(at: indexPath)
+        let cell: Cell = tableView.dequeueCell(at: indexPath)
         cell.configure(with: model)
         return cell.uiTableViewCell
     }
