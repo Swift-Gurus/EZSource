@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../EZSource/Classes/TableViewRow/RowAction.swift"
+            timestampString = "562624959.018925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "contextualAction"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EZSource.RowAction.contextualAction.getter : __C.UIContextualAction"
+                  moduleName = "EZSource"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aldotemp/Documents/Developer/EZSource/EZSource/Classes/TableViewRow/RowAction.swift"
+                  timestampString = "562624959.45759"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "46">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIContextualAction, __C.UIView, (Swift.Bool) -&gt; ()) -&gt; () in EZSource.RowAction.contextualAction.getter : __C.UIContextualAction"
+                  moduleName = "EZSource"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aldotemp/Documents/Developer/EZSource/EZSource/Classes/TableViewRow/RowAction.swift"
+                  timestampString = "562624959.461647"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "73">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tests/RowActionTestCases.swift"
+            timestampString = "562625137.180185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "testRowAction(action:equalsToConextual:file:line:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
