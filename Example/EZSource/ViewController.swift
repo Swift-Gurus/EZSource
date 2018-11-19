@@ -26,12 +26,13 @@ class ViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-       
+//        tableView.allowsMultipleSelection = true
+        
         source = TableViewDataSource(tableView: tableView,
                                      withTypes: [StringCell.self],
                                      reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
         
-        var row = TableViewRow<StringCell>(model: "My Row")
+        var row = TableViewRow<StringCell>(model: "My Row", onTap: { (string) in debugPrint("tapped with \(string)")})
        
         let action = RowAction { [weak self] in
             let alertController = UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         section.addHeader(header)
         
         var secondSection = TableViewSection(id: "Second Section")
-        secondSection.addRows([row,row,row])
+        secondSection.addRows([row,row,row,row,row,row,row,row,row,row,row,row,row,row,row,row])
         let headerWithBottonModel = HeaderWithButtonModel(title: "My button Header \n jkljkjdflsjdlfkjs",
                                                           buttonText: "Collapse",
                                                           collapsedText: "test") {

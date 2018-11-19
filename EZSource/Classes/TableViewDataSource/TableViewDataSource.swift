@@ -83,7 +83,6 @@ open class TableViewDataSource: NSObject  {
         if !info.changes.insertedIndexes.isEmpty {
             info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
         }
-        
     }
 }
 
@@ -114,21 +113,32 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectRow(of: tableView, at: indexPath)
         source.section(at: indexPath.section).tapOnRow(at: indexPath.row)
+    }
+    
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selectRow(of: tableView, at: indexPath)
+        source.section(at: indexPath.section).tapOnRow(at: indexPath.row)
+    }
+    
+    private func selectRow(of tableView: UITableView, at indexPath: IndexPath) {
+      let section = source.section(at: indexPath.section).selectingRow(of: tableView, at: indexPath)
+      source.replace(section: section)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return  source.section(at: section)
-            .headerProvider
-            .map{ $0.height }
-            .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+                      .headerProvider
+                      .map{ $0.height }
+                      .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return source.section(at: section)
-            .footerProvider
-            .map{ $0.height }
-            .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+                     .footerProvider
+                     .map{ $0.height }
+                     .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
