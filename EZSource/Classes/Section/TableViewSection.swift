@@ -10,7 +10,7 @@ import UIKit
 import SwiftyCollection
 
 public struct TableViewSection: Sectionable {
-    
+ 
     public private(set) var id: String
     public var numberOfRows: Int { return collapsed ? 0 : rows.count }
     public var animationConfig: AnimationConfig = AnimationConfig()
@@ -24,6 +24,7 @@ public struct TableViewSection: Sectionable {
     public init(id: String) {
         self.id = id
     }
+    
 }
 
 
@@ -98,6 +99,20 @@ extension TableViewSection {
     func tapOnRow(at index: Int) {
         rows.element(at: index)?.didTap()
     }
+    
+    func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Sectionable {
+        var mSelf = self
+        mSelf.rows = rows.enumerated().reduce([]) { (partial, element) -> [CellProvider] in
+            if element.offset == indexPath.row {
+                return partial + [element.element.selectingRow(of: tableView, at: indexPath)]
+            } else {
+               return partial + [element.element]
+            }
+            
+        }
+        return mSelf
+    }
+    
 }
 
 
@@ -196,6 +211,7 @@ protocol Sectionable: Identifiable {
     func tapOnRow(at index: Int)
     func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Self
     func expandCollapseSection(in tableView: UITableView, at index: Int)
+    func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Sectionable
 }
 
 // MARK: - AnimatableSection

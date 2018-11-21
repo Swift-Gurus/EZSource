@@ -64,4 +64,5 @@ class SectionSource {
     func replace(section: Sectionable) {
         self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
     }
+    
 }
