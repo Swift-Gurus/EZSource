@@ -118,8 +118,10 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        selectRow(of: tableView, at: indexPath)
-        source.section(at: indexPath.section).tapOnRow(at: indexPath.row)
+        if tableView.allowsMultipleSelection {
+            selectRow(of: tableView, at: indexPath)
+            source.section(at: indexPath.section).tapOnRow(at: indexPath.row)
+        }
     }
     
     private func selectRow(of tableView: UITableView, at indexPath: IndexPath) {
