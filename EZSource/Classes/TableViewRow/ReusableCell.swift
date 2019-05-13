@@ -12,7 +12,7 @@ public protocol Reusable {
 }
 
 public extension Reusable {
-   public static var reuseID: String { return "\(self)"}
+    static var reuseID: String { return "\(self)"}
 }
 
 public protocol TableViewCell: class {
