@@ -9,17 +9,17 @@ import Foundation
 
 // MARK: - AnimationConfig
 public struct AnimationConfig {
-    let deleteAnimation: UITableViewRowAnimation
-    let insertAnimation: UITableViewRowAnimation
-    let updateAnimation: UITableViewRowAnimation
-    let collapseAnimation: UITableViewRowAnimation
-    let expandAnimation: UITableViewRowAnimation
+    let deleteAnimation: UITableView.RowAnimation
+    let insertAnimation: UITableView.RowAnimation
+    let updateAnimation: UITableView.RowAnimation
+    let collapseAnimation: UITableView.RowAnimation
+    let expandAnimation: UITableView.RowAnimation
     
-    public init(deleteAnimation: UITableViewRowAnimation = .automatic,
-         insertAnimation: UITableViewRowAnimation = .automatic,
-         updateAnimation: UITableViewRowAnimation = .automatic,
-         collapseAnimation: UITableViewRowAnimation = .automatic,
-         expandAnimation: UITableViewRowAnimation = .automatic) {
+    public init(deleteAnimation: UITableView.RowAnimation = .automatic,
+         insertAnimation: UITableView.RowAnimation = .automatic,
+         updateAnimation: UITableView.RowAnimation = .automatic,
+         collapseAnimation: UITableView.RowAnimation = .automatic,
+         expandAnimation: UITableView.RowAnimation = .automatic) {
         self.deleteAnimation = deleteAnimation
         self.insertAnimation = insertAnimation
         self.updateAnimation = updateAnimation

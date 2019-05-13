@@ -32,7 +32,7 @@ extension MutableCollection where Self: RangeReplaceableCollection {
     
     @discardableResult
     public mutating func removeElement(where predicate: (Element) -> Bool) -> Self.Element? {
-        guard let index = index(where: predicate) else { return nil }
+        guard let index = firstIndex(where: predicate) else { return nil }
         return remove(at: index)
     }
 }
