@@ -30,7 +30,7 @@ class SectionSource {
     }
     
     func indexOfSection(_ section: Sectionable) -> Int? {
-        return sections.index(where: { $0.id == section.id })
+        return sections.firstIndex(where: { $0.id == section.id })
     }
     
     func update(with sections: [Sectionable]) {
