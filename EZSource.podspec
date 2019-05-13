@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
-  s.version          = '0.2.2'
+  s.version          = '0.2.3'
   s.summary          = 'Declarative Datasource/Delegate for TableView'
 
 
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/aldo-dev/EZSource.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
-  s.swift_version   = '4.0'
+  s.swift_version   = '5.0'
 
   s.source_files = 'EZSource/Classes/**/*'
   s.dependency 'SwiftyCollection'

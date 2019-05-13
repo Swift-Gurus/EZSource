@@ -133,14 +133,14 @@ extension TableViewDataSource: UITableViewDelegate {
         return  source.section(at: section)
                       .headerProvider
                       .map{ $0.height }
-                      .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+                      .map { $0  ?? UITableView.automaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return source.section(at: section)
                      .footerProvider
                      .map{ $0.height }
-                     .map { $0  ?? UITableViewAutomaticDimension } ?? 0.1
+                     .map { $0  ?? UITableView.automaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
