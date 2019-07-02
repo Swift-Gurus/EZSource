@@ -39,20 +39,20 @@ class SectionSource {
             return
         }
         
-        sections.forEach({ self.replace(section: $0)})
+        sections.forEach({ self.replace(section: $0) })
     }
     
     
     public func update(withInfo info: [SectionUpdateInfo]) {
         guard !self.sections.isEmpty else {
-            self.sections = info.map({$0.section})
+            self.sections = info.map({ $0.section })
             return
         }
-        sections = sections.map({self.updateSection($0, with: info)})
+        sections = sections.map({ self.updateSection($0, with: info) })
     }
     
     func updateSection(_ section: Sectionable, with info: [SectionUpdateInfo]) -> Sectionable {
-        guard let info = info.first(where: {$0.section.id == section.id }) else  { return section }
+        guard let info = info.first(where: { $0.section.id == section.id }) else  { return section }
         
         return section.updated(with: info.section.rows.first,
                                deletedIndex: info.changes.deletedIndexes.first.map({ $0.row }),
@@ -65,4 +65,20 @@ class SectionSource {
         self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
     }
     
+    func deleteEmptySections() -> [DeleteSectionInfo] {
+        let deletedInfo = sections.enumerated()
+                                  .filter({ $0.element.numberOfRows == 0 })
+                                  .map({ DeleteSectionInfo(section: $0.element, index: $0.offset)})
+        sections = sections.filter({ $0.numberOfRows > 0 })
+        return deletedInfo
+    }
+    
 }
+
+
+struct DeleteSectionInfo {
+    let section: Sectionable
+    let index: Int
+}
+
+

@@ -21,7 +21,9 @@ class ViewController: UIViewController {
         tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-       
+     
+        
+        
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -31,6 +33,7 @@ class ViewController: UIViewController {
         source = TableViewDataSource(tableView: tableView,
                                      withTypes: [StringCell.self],
                                      reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
+        source.deleteEmptySections = true
         
         var row = TableViewRow<StringCell>(model: "My Row", onTap: { (string) in debugPrint("tapped with \(string)")})
        
@@ -77,9 +80,8 @@ class ViewController: UIViewController {
         }
 
         secondSection.addHeader(headerButton)
-        secondSection.addRows([row])
-        let updateInfo = UpdateInfo(section: secondSection, changes: TableViewUpdates(insertedIndexes: [IndexPath(row: 3, section: 0)]))
-    
+        let updateInfo = UpdateInfo(section: section, changes: TableViewUpdates(deletedIndexes: [IndexPath(row: 0, section: 1)]))
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             self.source.updateWithAnimation(updates: [updateInfo])
             self.headers[secondSection.id]?.update(withModel: newHeader)
