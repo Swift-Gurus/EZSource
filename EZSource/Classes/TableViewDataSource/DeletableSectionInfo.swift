@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DeleteSectionInfo {
+struct DeletableSectionInfo {
     let section: Sectionable
     let index: Int
 }

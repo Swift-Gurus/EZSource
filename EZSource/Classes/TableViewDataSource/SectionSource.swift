@@ -65,10 +65,10 @@ class SectionSource {
         self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
     }
     
-    func deleteEmptySections() -> [DeleteSectionInfo] {
+    func deleteEmptySections() -> [DeletableSectionInfo] {
         let deletedInfo = sections.enumerated()
                                   .filter({ $0.element.numberOfRows == 0 })
-                                  .map({ DeleteSectionInfo(section: $0.element, index: $0.offset)})
+                                  .map({ DeletableSectionInfo(section: $0.element, index: $0.offset)})
         sections = sections.filter({ $0.numberOfRows > 0 })
         return deletedInfo
     }

@@ -99,7 +99,7 @@ open class TableViewDataSource: NSObject  {
         deleteInfo.forEach(deleteSectioUsingInfo)
     }
     
-    private func deleteSectioUsingInfo(_ info: DeleteSectionInfo) {
+    private func deleteSectioUsingInfo(_ info: DeletableSectionInfo) {
        info.section.deleteSection(in: tv, at: info.index)
     }
 }
