@@ -75,10 +75,3 @@ class SectionSource {
     
 }
 
-
-struct DeleteSectionInfo {
-    let section: Sectionable
-    let index: Int
-}
-
-
