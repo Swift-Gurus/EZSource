@@ -12,8 +12,6 @@ open class TableViewDataSource: NSObject  {
     var source = SectionSource()
     
     var tv: UITableView
-    public var deleteEmptySections = false
-    
     public init(tableView: UITableView,
                 withTypes types: [ReusableCell.Type],
                 reusableViews: [ReusableView.Type] = []) {
@@ -37,7 +35,6 @@ open class TableViewDataSource: NSObject  {
     
     public func reload(with sections: [TableViewSection]) {
         source.update(with: sections)
-        deleteSectionsIfNeed()
         tv.reloadData()
     }
     
@@ -47,9 +44,7 @@ open class TableViewDataSource: NSObject  {
             guard let `self` = self else { return }
             let new = source.sections[index].collapsedCopy(collapse)
             self.source.update(with: [new])
-
             new.expandCollapseSection(in: self.tv, at: index)
-           
             }, completion: nil)
     }
     
@@ -67,10 +62,8 @@ open class TableViewDataSource: NSObject  {
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             self.source.update(withInfo: updates)
-            self.deleteSectionsIfNeed()
             updates.filter({!$0.section.collapsed})
-                   .filter({ $0.section.numberOfRows > 0 })
-                   .forEach({ self.launchUpdates(in: self.tv, with: $0) })
+                .forEach({ self.launchUpdates(in: self.tv, with: $0) })
             
             }, completion: nil)
     }
@@ -91,16 +84,6 @@ open class TableViewDataSource: NSObject  {
         if !info.changes.insertedIndexes.isEmpty {
             info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
         }
-    }
-    
-    private func deleteSectionsIfNeed() {
-        guard deleteEmptySections else { return }
-        let deleteInfo = source.deleteEmptySections()
-        deleteInfo.forEach(deleteSectioUsingInfo)
-    }
-    
-    private func deleteSectioUsingInfo(_ info: DeletableSectionInfo) {
-       info.section.deleteSection(in: tv, at: info.index)
     }
 }
 

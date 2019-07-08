@@ -134,10 +134,6 @@ extension TableViewSection: AnimatableSection {
         tableView.reloadSections([index], with: animationConfig.updateAnimation)
     }
     
-    public func deleteSection(in tableView: UITableView, at index: Int) {
-        tableView.deleteSections([index], with: animationConfig.deleteAnimation)
-    }
-    
     func expandCollapseSection(in tableView: UITableView, at index: Int) {
         collapsed ? collapseSection(in: tableView, at: index) : expandSection(in: tableView, at: index)
     }
@@ -216,7 +212,6 @@ protocol Sectionable: Identifiable {
     func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Self
     func expandCollapseSection(in tableView: UITableView, at index: Int)
     func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Sectionable
-    func deleteSection(in tableView: UITableView, at index: Int)
 }
 
 // MARK: - AnimatableSection

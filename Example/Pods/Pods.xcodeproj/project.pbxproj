@@ -24,7 +24,6 @@
 		61FEF74D4D6C21E7ECB7B273B9CFD7CB /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A5B933DBDF2B644824E1353A52275 /* CollectionExtensions.swift */; };
 		646B214981D818640C4938AFA986DCF5 /* SwiftyCollection-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1EBA59FD41FF3FF47CC116A11B562 /* SwiftyCollection-dummy.m */; };
 		7ED6ED4759F7DC2433A8312440BE999E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E56E2A9741497AB14EE5BD231E9087 /* Foundation.framework */; };
-		894B0D2522CBDD680088A38A /* DeletableSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B0D2422CBDD680088A38A /* DeletableSectionInfo.swift */; };
 		8E1402B10B1CFC5A896717BEC7D44A6D /* Pods-EZSource_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D6F755774193570DCF55AA6CFE0DB7AC /* Pods-EZSource_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		91F56C9895C2E73C1BBCAB4EEA08DD08 /* EZSource-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F378DEB3E5FDE062A10366AA54FB760 /* EZSource-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9997D577371045AAA89BF3418FD04ADA /* TableViewUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F018C7D5F963DD8AEC670C6650A6BA4A /* TableViewUpdates.swift */; };
@@ -99,7 +98,6 @@
 		80C5491247B9AD3122D8AE774AB28CFD /* RowAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RowAction.swift; sourceTree = "<group>"; };
 		81B695291E8D35562C071BAF0556E2D8 /* SectionSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SectionSource.swift; sourceTree = "<group>"; };
 		84E86F4C68ED4C4AEB503FC9B138A1B0 /* EZSource-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EZSource-dummy.m"; sourceTree = "<group>"; };
-		894B0D2422CBDD680088A38A /* DeletableSectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletableSectionInfo.swift; sourceTree = "<group>"; };
 		92FE4F7E94050B2E3759167AF34EB6B1 /* EZSource-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EZSource-prefix.pch"; sourceTree = "<group>"; };
 		974A267098B661004E1A26C0A9766D0E /* SwiftyCollection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyCollection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0984692D3C8E851CF3A76562ADEFFE /* Pods-EZSource_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EZSource_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 			children = (
 				81B695291E8D35562C071BAF0556E2D8 /* SectionSource.swift */,
 				C8DDADA3FE4408EC12276B189DEE0C70 /* TableViewDataSource.swift */,
-				894B0D2422CBDD680088A38A /* DeletableSectionInfo.swift */,
 			);
 			name = TableViewDataSource;
 			path = EZSource/Classes/TableViewDataSource;
@@ -565,7 +562,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				894B0D2522CBDD680088A38A /* DeletableSectionInfo.swift in Sources */,
 				1AC79E0351B76B75DE66A75DA3A1C580 /* AnimationConfig.swift in Sources */,
 				101F3915D7194D5685536AE158C167C3 /* EZSource-dummy.m in Sources */,
 				CC95B7A6FC9E82FF68F4F945119FB3C2 /* HeaderFooterProvider.swift in Sources */,

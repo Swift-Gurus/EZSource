@@ -33,7 +33,6 @@ class ViewController: UIViewController {
         source = TableViewDataSource(tableView: tableView,
                                      withTypes: [StringCell.self],
                                      reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
-        source.deleteEmptySections = true
         
         var row = TableViewRow<StringCell>(model: "My Row", onTap: { (string) in debugPrint("tapped with \(string)")})
        
