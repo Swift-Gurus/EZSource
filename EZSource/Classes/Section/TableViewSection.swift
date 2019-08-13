@@ -10,14 +10,11 @@ import UIKit
 import SwiftyCollection
 
 public struct TableViewSection: Sectionable {
-   
-    
- 
+
     public private(set) var id: String
     public var numberOfRows: Int { return collapsed ? 0 : rows.count }
     public var animationConfig: AnimationConfig = AnimationConfig()
     public var collapsed: Bool = false
-    public var deleted: Bool = false
     var headerProvider: SectionHeaderFooterProvider?
     var footerProvider: SectionHeaderFooterProvider?
     
@@ -25,11 +22,6 @@ public struct TableViewSection: Sectionable {
     
     public init(id: String) {
         self.id = id
-    }
-    func deletedCopy(_ flag: Bool) -> TableViewSection {
-        var mSelf = self
-        mSelf.deleted = flag
-        return mSelf
     }
 }
 
@@ -140,13 +132,6 @@ extension TableViewSection: AnimatableSection {
         tableView.reloadSections([index], with: animationConfig.updateAnimation)
     }
     
-    public func deleteSection(in tableView: UITableView, at index: Int) {
-        tableView.reloadSections([index], with: animationConfig.deleteAnimation)
-    }
-    
-    public func insertSection(in tableView: UITableView, at index: Int) {
-        tableView.reloadSections([index], with: animationConfig.insertAnimation)
-    }
     
     func expandCollapseSection(in tableView: UITableView, at index: Int) {
         collapsed ? collapseSection(in: tableView, at: index) : expandSection(in: tableView, at: index)
@@ -219,9 +204,7 @@ protocol Sectionable: Identifiable {
     var headerProvider: SectionHeaderFooterProvider? { get  set }
     var footerProvider: SectionHeaderFooterProvider? { get set }
     var collapsed: Bool { get }
-    var deleted: Bool { get }
     func collapsedCopy(_ flag: Bool) -> Self
-    func deletedCopy(_ flag: Bool) -> Self
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     func traillingActionsForRow(at index: Int) -> [UIContextualAction]
     func leadingActionsForRow(at index: Int) -> [UIContextualAction]
@@ -230,8 +213,6 @@ protocol Sectionable: Identifiable {
     func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Self
     func expandCollapseSection(in tableView: UITableView, at index: Int)
     func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Sectionable
-    func deleteSection(in tableView: UITableView, at index: Int)
-    func insertSection(in tableView: UITableView, at index: Int)
     func reload(in tableView: UITableView, at index: Int) 
 }
 

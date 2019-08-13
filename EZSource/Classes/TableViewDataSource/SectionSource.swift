@@ -73,8 +73,4 @@ class SectionSource {
         self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
     }
     
-    private func createDeletedSectionIfNeed(_ section: Sectionable) -> Sectionable {
-        return  section.numberOfRows == 0 ? section.deletedCopy(true) : section
-    }
-    
 }
