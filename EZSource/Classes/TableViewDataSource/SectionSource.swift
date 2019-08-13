@@ -25,6 +25,10 @@ class SectionSource {
         return sections[index]
     }
     
+    func sectionWithID(_ id: String) -> Sectionable? {
+        return sections.first(where: { $0.id == id })
+    }
+    
     func numberOfRows(in section: Int) -> Int {
         return sections.element(at: section)?.numberOfRows ?? 0
     }
@@ -45,24 +49,32 @@ class SectionSource {
     
     public func update(withInfo info: [SectionUpdateInfo]) {
         guard !self.sections.isEmpty else {
-            self.sections = info.map({$0.section})
+            self.sections = info.map({ $0.section })
             return
         }
-        sections = sections.map({self.updateSection($0, with: info)})
+        sections = sections.map({ self.updateSection($0, with: info) })
     }
     
     func updateSection(_ section: Sectionable, with info: [SectionUpdateInfo]) -> Sectionable {
         guard let info = info.first(where: {$0.section.id == section.id }) else  { return section }
         
-        return section.updated(with: info.section.rows.first,
-                               deletedIndex: info.changes.deletedIndexes.first.map({ $0.row }),
-                               updatedIndex: info.changes.updatedIndexes.first.map({ $0.row }),
-                               addedIndex: info.changes.insertedIndexes.first.map({ $0.row }))
+        var newSection = section.updated(with: info.section.rows.first,
+                                         deletedIndex: info.changes.deletedIndexes.first.map({ $0.row }),
+                                         updatedIndex: info.changes.updatedIndexes.first.map({ $0.row }),
+                                         addedIndex: info.changes.insertedIndexes.first.map({ $0.row }))
+
+        newSection.footerProvider = info.section.footerProvider
+        newSection.headerProvider = info.section.headerProvider
+        return newSection
         
     }
     
     func replace(section: Sectionable) {
         self.sections = sections.replacingOccurrences(with: section, where: { $0.id == section.id })
+    }
+    
+    private func createDeletedSectionIfNeed(_ section: Sectionable) -> Sectionable {
+        return  section.numberOfRows == 0 ? section.deletedCopy(true) : section
     }
     
 }

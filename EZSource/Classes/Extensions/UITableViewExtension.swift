@@ -22,7 +22,6 @@ extension UITableView {
         return cell
     }
     
-    
     func register(reusableCellType: ReusableCell.Type) {
         register(reusableCellType, forCellReuseIdentifier: reusableCellType.reuseID)
     }

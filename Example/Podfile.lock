@@ -1,7 +1,7 @@
 PODS:
-  - EZSource (0.2.4):
+  - EZSource (0.2.7):
     - SwiftyCollection
-  - SwiftyCollection (1.0.2)
+  - SwiftyCollection (1.0.6)
 
 DEPENDENCIES:
   - EZSource (from `../`)
@@ -15,8 +15,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EZSource: 15c381c633f7e13c67804d4d8e787e20ef10e6a6
-  SwiftyCollection: 1e356dbfae09279974a7a53ac7be86e20f52fcf8
+  EZSource: 2ed7e18e6c45a578dd723d051ab0ac957848074f
+  SwiftyCollection: b97f5697570e7b4357db4e7fa2f6712a5a27cdab
 
 PODFILE CHECKSUM: de1d2ffa3677c9ec60afe5510e611c72178345cb
 

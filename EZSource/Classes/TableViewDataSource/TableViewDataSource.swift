@@ -10,7 +10,7 @@ import Foundation
 open class TableViewDataSource: NSObject  {
     
     var source = SectionSource()
-    
+    public var dynamicSections = false
     var tv: UITableView
     public init(tableView: UITableView,
                 withTypes types: [ReusableCell.Type],
@@ -21,16 +21,14 @@ open class TableViewDataSource: NSObject  {
         tableView.delegate = self
         
         types.map({ (cellType: $0, id: $0.reuseID) })
-            .forEach({ tableView.register($0.cellType, forCellReuseIdentifier: $0.id) })
+             .forEach({ tableView.register($0.cellType, forCellReuseIdentifier: $0.id) })
         
         reusableViews.forEach({ tableView.registerFooterHeader(reusableViewType: $0) })
     }
     
-    
     public func isSectionCollapsed(_ section: TableViewSection) -> Bool? {
         return source.indexOfSection(section).map({ source.section(at: $0) })
-            .map({$0.collapsed })
-        
+                                             .map({ $0.collapsed })
     }
     
     public func reload(with sections: [TableViewSection]) {
@@ -45,7 +43,7 @@ open class TableViewDataSource: NSObject  {
             let new = source.sections[index].collapsedCopy(collapse)
             self.source.update(with: [new])
             new.expandCollapseSection(in: self.tv, at: index)
-            }, completion: nil)
+        }, completion: nil)
     }
     
     
@@ -55,25 +53,34 @@ open class TableViewDataSource: NSObject  {
     
     public func updateWithAnimation(updates: [UpdateInfo]) {
         guard !source.sections.isEmpty else {
-            reload(with: updates.map({$0.section}))
+            reload(with: updates.map({ $0.section }))
+            return
+        }
+        
+        guard !dynamicSections else {
+            updateNoAnimation(updates: updates)
             return
         }
         
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             self.source.update(withInfo: updates)
+            
             updates.filter({!$0.section.collapsed})
-                .forEach({ self.launchUpdates(in: self.tv, with: $0) })
+                   .forEach({ self.launchUpdates(in: self.tv, with: $0) })
             
             }, completion: nil)
     }
     
+    public func updateNoAnimation(updates: [UpdateInfo]) {
+        source.update(withInfo: updates)
+        tv.reloadData()
+    }
     
     private func launchUpdates(in tableView: UITableView, with info : UpdateInfo) {
         
         
         if !info.changes.deletedIndexes.isEmpty {
-            
             info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
         }
         
@@ -85,6 +92,8 @@ open class TableViewDataSource: NSObject  {
             info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
         }
     }
+    
+    
 }
 
 
@@ -106,11 +115,15 @@ extension TableViewDataSource: UITableViewDataSource {
 extension TableViewDataSource: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return source.section(at: section).footerProvider?.headerView(forTableView: tableView)
+        let tvSection = source.section(at: section)
+        guard !shouldHideHeaderFooter(for: tvSection) else { return nil }
+        return tvSection.footerProvider?.headerView(forTableView: tableView)
     }
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return source.section(at: section).headerProvider?.headerView(forTableView: tableView)
+        let tvSection = source.section(at: section)
+        guard !shouldHideHeaderFooter(for: tvSection) else { return nil }
+        return tvSection.headerProvider?.headerView(forTableView: tableView)
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -131,17 +144,19 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return  source.section(at: section)
-                      .headerProvider
-                      .map{ $0.height }
-                      .map { $0  ?? UITableView.automaticDimension } ?? 0.1
+        let tvSection = source.section(at: section)
+        guard !shouldHideHeaderFooter(for: tvSection) else { return 0.1 }
+        return tvSection.headerProvider
+                        .map{ $0.height }
+                        .map { $0  ?? UITableView.automaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return source.section(at: section)
-                     .footerProvider
-                     .map{ $0.height }
-                     .map { $0  ?? UITableView.automaticDimension } ?? 0.1
+        let tvSection = source.section(at: section)
+        guard !shouldHideHeaderFooter(for: tvSection) else { return 0.1 }
+        return tvSection.footerProvider
+                        .map{ $0.height }
+                        .map { $0  ?? UITableView.automaticDimension } ?? 0.1
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -152,5 +167,9 @@ extension TableViewDataSource: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let actions = source.section(at: indexPath.section).traillingActionsForRow(at: indexPath.row)
         return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    private func shouldHideHeaderFooter(for section: Sectionable) -> Bool {
+        return (section.numberOfRows == 0 && dynamicSections && !section.collapsed)
     }
 }
