@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2B36E35EA262D4BC37ED6D9451CD1C14"
+               BlueprintIdentifier = "EF5AC83A8F6A2694739786F32786D79B"
+               BuildableName = "EZSource.framework"
                BlueprintName = "EZSource"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "EZSource.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

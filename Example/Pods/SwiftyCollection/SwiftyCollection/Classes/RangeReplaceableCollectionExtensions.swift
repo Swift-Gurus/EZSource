@@ -9,26 +9,26 @@ import Foundation
 
 public extension RangeReplaceableCollection {
     
-    public func removingLast() -> Self {
+    func removingLast() -> Self {
         return Self(dropLast())
     }
     
-    public func removingFirst() -> Self {
+    func removingFirst() -> Self {
         return Self(dropFirst())
     }
     
-    public func removingElement(where predicate: (Element) -> Bool) -> Self {
+    func removingElement(where predicate: (Element) -> Bool) -> Self {
         return filter({ !predicate($0) })
     }
     
-    public func replacingOccurrences(with newElement: Element, where predicate: (Element) -> Bool) -> Self {
+    func replacingOccurrences(with newElement: Element, where predicate: (Element) -> Bool) -> Self {
         return reduce(Self([])) { (partial, element) -> Self in
             predicate(element) ? partial + [newElement] : partial + [element]
         }
 
     }
     
-    public func replacing(with newElement: Element, at index: Self.Index) -> Self {
+    func replacing(with newElement: Element, at index: Self.Index) -> Self {
         guard indexInBounds(index) else { return self }
         let range = Range<Self.Index>(uncheckedBounds: (lower: index, upper: self.index(after: index)))
         var mutated = self
@@ -36,7 +36,7 @@ public extension RangeReplaceableCollection {
         return mutated
     }
     
-    public func removing(at index: Self.Index) -> Self {
+    func removing(at index: Self.Index) -> Self {
         guard indexInBounds(index) else { return self }
         let range = Range<Self.Index>(uncheckedBounds: (lower: index, upper: self.index(after: index)))
         var mutated = self
@@ -48,15 +48,15 @@ public extension RangeReplaceableCollection {
 
 public extension RangeReplaceableCollection where Element: Equatable {
     
-    public func removingElement(_ element: Element) -> Self {
+    func removingElement(_ element: Element) -> Self {
         return self.removingElement(where: { $0 == element})
     }
     
-    public func replacingOccurrences(of element: Element, with newElement: Element ) -> Self  {
+    func replacingOccurrences(of element: Element, with newElement: Element ) -> Self  {
         return self.replacingOccurrences(with: newElement, where: { $0 == element })
     }
     
-    public func removingDuplicates() -> Self {
+    func removingDuplicates() -> Self {
         return  reduce(Self([])) { (partial, element) -> Self in
             !partial.contains(element) ? partial + [element] : partial
         }
