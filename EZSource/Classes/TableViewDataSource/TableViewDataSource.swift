@@ -57,6 +57,11 @@ open class TableViewDataSource: NSObject  {
             return
         }
         
+        guard !dynamicSections else {
+            updateNoAnimation(updates: updates)
+            return
+        }
+        
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             self.source.update(withInfo: updates)
@@ -67,6 +72,10 @@ open class TableViewDataSource: NSObject  {
             }, completion: nil)
     }
     
+    public func updateNoAnimation(updates: [UpdateInfo]) {
+        source.update(withInfo: updates)
+        tv.reloadData()
+    }
     
     private func launchUpdates(in tableView: UITableView, with info : UpdateInfo) {
         
@@ -74,34 +83,14 @@ open class TableViewDataSource: NSObject  {
         if !info.changes.deletedIndexes.isEmpty {
             info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
         }
-        deleteSectionIfNeed(info.section, in: tableView)
         
         if !info.changes.updatedIndexes.isEmpty {
             info.section.updateRows(in: tableView, at: info.changes.updatedIndexes)
         }
         
-        insertSectionIfNeed(info.section, in: tableView)
         if !info.changes.insertedIndexes.isEmpty {
             info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
         }
-    }
-    
-    private func deleteSectionIfNeed(_ section: Sectionable, in tableView: UITableView) {
-        guard dynamicSections,
-            let index = source.indexOfSection(section),
-            let tvSection =  source.sectionWithID(section.id),
-            tvSection.numberOfRows == 0  else { return }
-        tvSection.deleteSection(in: tableView, at: index)
-
-    }
-    
-    private func insertSectionIfNeed(_ section: Sectionable, in tableView: UITableView) {
-        guard dynamicSections,
-            let index = source.indexOfSection(section),
-            let tvSection =  source.sectionWithID(section.id),
-            tvSection.numberOfRows > 0 else { return }
-        tvSection.insertSection(in: tableView, at: index)
-        
     }
     
     

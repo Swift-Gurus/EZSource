@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
-  s.version          = '0.2.7'
+  s.version          = '0.2.8'
   s.summary          = 'Declarative Datasource/Delegate for TableView'
 
 
