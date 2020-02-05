@@ -64,7 +64,6 @@ open class TableViewDataSource: NSObject  {
         
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
-            self.source.update(withInfo: updates)
             
             updates.filter({!$0.section.collapsed})
                    .forEach({ self.launchUpdates(in: self.tv, with: $0) })
@@ -78,7 +77,7 @@ open class TableViewDataSource: NSObject  {
     }
     
     private func launchUpdates(in tableView: UITableView, with info : UpdateInfo) {
-        
+        self.source.sections.indices.map({ source.sections[$0] = info.section })
         
         if !info.changes.deletedIndexes.isEmpty {
             info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
