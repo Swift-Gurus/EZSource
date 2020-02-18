@@ -12,6 +12,7 @@ protocol CellProvider: TappableCell,CellDequeuer,CellActionsProvider ,Selectable
 protocol CellActionsProvider {
     var trailingContextualActions: [UIContextualAction] { get }
     var leadingContextualActions: [UIContextualAction] { get }
+    var performsFirstActionWithFullSwipe: Bool { get }
 }
 
 protocol TappableCell {
@@ -28,20 +29,23 @@ protocol CellDequeuer {
 
 
 public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
-    
+
+    public var performsFirstActionWithFullSwipe: Bool
     let model: Cell.Model
     let onTap: ((Cell.Model) -> Void)?
-    var traillingActions: [RowAction] = []
-    var leadingActions: [RowAction] = []
+    public var traillingActions: [RowAction] = []
+    public var leadingActions: [RowAction] = []
     var isSelected: Bool = false
     public init(model: Cell.Model,
                 traillingActions: [RowAction] = [],
                 leadingActions: [RowAction] = [],
+                performsFirstActionWithFullSwipe: Bool = true,
                 onTap: ((Cell.Model) -> Void)? = nil) {
         self.model = model
         self.onTap = onTap
         self.traillingActions = traillingActions
         self.leadingActions = leadingActions
+        self.performsFirstActionWithFullSwipe = performsFirstActionWithFullSwipe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell {
