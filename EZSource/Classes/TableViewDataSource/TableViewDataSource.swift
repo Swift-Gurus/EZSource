@@ -7,6 +7,13 @@
 
 import Foundation
 
+extension UISwipeActionsConfiguration {
+    convenience init(actions: [UIContextualAction], longSwipe: Bool){
+        self.init(actions: actions)
+        self.performsFirstActionWithFullSwipe = longSwipe
+    }
+}
+
 open class TableViewDataSource: NSObject  {
     
     var source = SectionSource()
@@ -160,13 +167,20 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let actions = source.section(at: indexPath.section).leadingActionsForRow(at: indexPath.row)
-        return UISwipeActionsConfiguration(actions: actions)
+
+        return source.section(at: indexPath.section)
+                     .rows
+                     .element(at: indexPath.row)
+                     .flatMap({ ($0.leadingContextualActions, $0.performsFirstActionWithFullSwipe )})
+                     .map(UISwipeActionsConfiguration.init)
     }
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let actions = source.section(at: indexPath.section).traillingActionsForRow(at: indexPath.row)
-        return UISwipeActionsConfiguration(actions: actions)
+        return source.section(at: indexPath.section)
+                     .rows
+                     .element(at: indexPath.row)
+                     .flatMap({ ($0.trailingContextualActions, $0.performsFirstActionWithFullSwipe )})
+                     .map(UISwipeActionsConfiguration.init)
     }
     
     private func shouldHideHeaderFooter(for section: Sectionable) -> Bool {
