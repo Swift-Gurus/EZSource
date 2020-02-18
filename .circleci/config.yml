@@ -4,7 +4,7 @@ version: 2
 jobs:
   run-tests: 
     macos:
-        xcode: "10.2.0"
+        xcode: "10.2.1"
     shell: /bin/bash --login -eo pipefail
     working_directory: /Users/distiller/project
     environment: 
@@ -14,13 +14,23 @@ jobs:
         SCAN_SCHEME: EZSource-Example
         SCAN_WORKSPACE: Example/EZSource.xcworkspace    
     steps:
-      - run:
-          name: Set Ruby Version
-          command:  echo "ruby-2.4" > ~/.ruby-version
-      - run: gem install bundler
-      - run: gem update fastlane
       - checkout
-      - run: bundle install
+      - restore_cache:
+          keys:
+          - v1-gems-{{ checksum "Gemfile.lock" }}
+          # Fall back to using the latest cache if no exact match is found.
+          - v1-gems-
+      # Install gems.
+      - run:
+          name: Bundle install
+          command: bundle check || bundle install
+          environment:
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
+      - save_cache:
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run: 
           name: Running Tests
           command: bundle exec fastlane runTests
