@@ -35,7 +35,11 @@ class ViewController: UIViewController {
                                      withTypes: [StringCell.self],
                                      reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
         source.dynamicSections = true
-        var row = TableViewRow<StringCell>(model: "My Row", onTap: { (string) in debugPrint("tapped with \(string)")})
+
+        var row = TableViewRow<StringCell>(model: "My Row",
+                                           traillingSwipeConfiguration: RowActionSwipeConfiguration(),
+                                           leadingSwipeConfiguration: RowActionSwipeConfiguration(),
+                                           onTap: { (string) in debugPrint("tapped with \(string)")})
        
         let action = RowAction { [weak self] in
             let alertController = UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)

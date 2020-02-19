@@ -87,11 +87,11 @@ extension TableViewSection {
     }
     
     func traillingActionsForRow(at index: Int) -> [UIContextualAction] {
-        return rows.element(at: index)?.trailingContextualActions ?? []
+        return rows.element(at: index)?.trailingActionSwipeConfiguration.contextualActions ?? []
     }
     
     func leadingActionsForRow(at index: Int) -> [UIContextualAction] {
-        return rows.element(at: index)?.leadingContextualActions ?? []
+        return rows.element(at: index)?.leadingActionSwipeConfiguration.contextualActions ?? []
     }
     
     func tapOnRow(at index: Int) {
