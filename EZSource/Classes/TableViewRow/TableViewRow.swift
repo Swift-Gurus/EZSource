@@ -9,10 +9,14 @@ import Foundation
 
 protocol CellProvider: TappableCell,CellDequeuer,CellActionsProvider ,Selectable { }
 
+struct CellActionSwipeConfiguration {
+    let contextualActions: [UIContextualAction]
+    let performFirstActionWithFullSwipe: Bool
+}
+
 protocol CellActionsProvider {
-    var trailingContextualActions: [UIContextualAction] { get }
-    var leadingContextualActions: [UIContextualAction] { get }
-    var performsFirstActionWithFullSwipe: Bool { get }
+    var trailingActionSwipeConfiguration: CellActionSwipeConfiguration { get }
+    var leadingActionSwipeConfiguration: CellActionSwipeConfiguration { get }
 }
 
 protocol TappableCell {
@@ -27,25 +31,31 @@ protocol CellDequeuer {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell
 }
 
+public struct RowActionSwipeConfiguration {
+    public var actions: [RowAction]
+    public let performFirstActionWithFullSwipe: Bool
+
+    public init(actions: [RowAction] = [],
+                performFirstActionWithFullSwipe: Bool = true) {
+        self.actions = actions
+        self.performFirstActionWithFullSwipe = performFirstActionWithFullSwipe
+    }
+}
 
 public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
-
-    public var performsFirstActionWithFullSwipe: Bool
     let model: Cell.Model
     let onTap: ((Cell.Model) -> Void)?
-    public var traillingActions: [RowAction] = []
-    public var leadingActions: [RowAction] = []
+    public var traillingSwipeConfiguration: RowActionSwipeConfiguration
+    public var leadingSwipeConfiguration: RowActionSwipeConfiguration
     var isSelected: Bool = false
     public init(model: Cell.Model,
-                traillingActions: [RowAction] = [],
-                leadingActions: [RowAction] = [],
-                performsFirstActionWithFullSwipe: Bool = true,
+                traillingSwipeConfiguration: RowActionSwipeConfiguration,
+                leadingSwipeConfiguration: RowActionSwipeConfiguration,
                 onTap: ((Cell.Model) -> Void)? = nil) {
         self.model = model
         self.onTap = onTap
-        self.traillingActions = traillingActions
-        self.leadingActions = leadingActions
-        self.performsFirstActionWithFullSwipe = performsFirstActionWithFullSwipe
+        self.traillingSwipeConfiguration = traillingSwipeConfiguration
+        self.leadingSwipeConfiguration = leadingSwipeConfiguration
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell {
@@ -62,12 +72,17 @@ public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusab
         onTap?(model)
     }
     
-    var trailingContextualActions: [UIContextualAction] {
-        return traillingActions.map({ $0.contextualAction })
+    var trailingActionSwipeConfiguration: CellActionSwipeConfiguration {
+        return getSwipeConfiguration(fromRowActionSwipeConfig: traillingSwipeConfiguration)
     }
     
-    var leadingContextualActions: [UIContextualAction] {
-        return leadingActions.map({ $0.contextualAction })
+    var leadingActionSwipeConfiguration: CellActionSwipeConfiguration {
+        return getSwipeConfiguration(fromRowActionSwipeConfig: leadingSwipeConfiguration)
+    }
+
+    private func getSwipeConfiguration(fromRowActionSwipeConfig config: RowActionSwipeConfiguration) -> CellActionSwipeConfiguration {
+        return CellActionSwipeConfiguration(contextualActions: config.actions.map({ $0.contextualAction }),
+                                            performFirstActionWithFullSwipe: config.performFirstActionWithFullSwipe)
     }
     
 }
@@ -77,11 +92,11 @@ public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusab
 extension TableViewRow {
     
     public mutating func addRowTrailingActions(_ actions: [RowAction]) {
-        traillingActions.append(contentsOf: actions)
+        traillingSwipeConfiguration.actions.append(contentsOf: actions)
     }
     
     public mutating func addRowLeadingActions(_ actions: [RowAction]) {
-        leadingActions.append(contentsOf: actions)
+        leadingSwipeConfiguration.actions.append(contentsOf: actions)
     }
 }
 

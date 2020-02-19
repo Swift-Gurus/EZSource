@@ -171,7 +171,8 @@ extension TableViewDataSource: UITableViewDelegate {
         return source.section(at: indexPath.section)
                      .rows
                      .element(at: indexPath.row)
-                     .flatMap({ ($0.leadingContextualActions, $0.performsFirstActionWithFullSwipe )})
+                     .flatMap({ $0.leadingActionSwipeConfiguration })
+                     .map({ ($0.contextualActions, $0.performFirstActionWithFullSwipe) })
                      .map(UISwipeActionsConfiguration.init)
     }
     
@@ -179,7 +180,8 @@ extension TableViewDataSource: UITableViewDelegate {
         return source.section(at: indexPath.section)
                      .rows
                      .element(at: indexPath.row)
-                     .flatMap({ ($0.trailingContextualActions, $0.performsFirstActionWithFullSwipe )})
+                     .flatMap({ $0.trailingActionSwipeConfiguration })
+                     .flatMap({ ($0.contextualActions, $0.performFirstActionWithFullSwipe )})
                      .map(UISwipeActionsConfiguration.init)
     }
     

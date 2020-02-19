@@ -15,7 +15,9 @@ final class TableViewRowTester {
     var action: RowAction!
     var actionTester = RowActionTester()
     init() {
-        row = TableViewRow<MockReusableCell>(model: "test")
+        row = TableViewRow<MockReusableCell>(model: "test",
+                                             traillingSwipeConfiguration: RowActionSwipeConfiguration(),
+                                             leadingSwipeConfiguration: RowActionSwipeConfiguration())
         actionTester = RowActionTester()
     }
     
@@ -41,16 +43,16 @@ final class TableViewRowTester {
     }
     
     func testRowContainsCreatedLeadingAction(file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(row.leadingActions.compactMap({$0.title}), [action.title],file: file, line: line)
-        actionTester.testRowAction(action: action, equalsToConextual: row.leadingContextualActions.first! )
+        XCTAssertEqual(row.leadingSwipeConfiguration.actions.compactMap({$0.title}), [action.title],file: file, line: line)
+        actionTester.testRowAction(action: action,
+                                   equalsToConextual: row.leadingActionSwipeConfiguration.contextualActions.first! )
     }
     
     func testRowContainsCreatedTraillingAction(file: StaticString = #file, line: UInt = #line) {
-        XCTAssertEqual(row.traillingActions.compactMap({$0.title}), [action.title],file: file, line: line)
-        actionTester.testRowAction(action: action, equalsToConextual: row.trailingContextualActions.first! )
+        XCTAssertEqual(row.traillingSwipeConfiguration.actions.compactMap({$0.title}), [action.title],file: file, line: line)
+        actionTester.testRowAction(action: action,
+                                   equalsToConextual: row.trailingActionSwipeConfiguration.contextualActions.first! )
     }
-    
-    
 
 }
 
