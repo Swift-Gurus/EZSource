@@ -10,7 +10,7 @@ jobs:
     environment: 
         FL_OUTPUT_DIR: output
         REFRESH_CERTIFICATES: false
-        SCAN_DEVICE: iPhone 5s
+        SCAN_DEVICE: iPhone 8
         SCAN_SCHEME: EZSource-Example
         SCAN_WORKSPACE: Example/EZSource.xcworkspace    
     steps:
