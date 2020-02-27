@@ -41,6 +41,9 @@ public struct RowActionSwipeConfiguration {
         self.performFirstActionWithFullSwipe = performFirstActionWithFullSwipe
     }
     
+   public static var empty: RowActionSwipeConfiguration {
+        RowActionSwipeConfiguration()
+    }
 }
 
 public class TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
