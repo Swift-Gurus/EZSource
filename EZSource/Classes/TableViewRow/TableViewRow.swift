@@ -40,17 +40,21 @@ public struct RowActionSwipeConfiguration {
         self.actions = actions
         self.performFirstActionWithFullSwipe = performFirstActionWithFullSwipe
     }
+    
+   public static var empty: RowActionSwipeConfiguration {
+        RowActionSwipeConfiguration()
+    }
 }
 
-public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
-    let model: Cell.Model
+public class TableViewRow<Cell>: CellProvider where Cell: Configurable & ReusableCell  {
+    public var model: Cell.Model
     let onTap: ((Cell.Model) -> Void)?
     public var traillingSwipeConfiguration: RowActionSwipeConfiguration
     public var leadingSwipeConfiguration: RowActionSwipeConfiguration
     var isSelected: Bool = false
     public init(model: Cell.Model,
-                traillingSwipeConfiguration: RowActionSwipeConfiguration,
-                leadingSwipeConfiguration: RowActionSwipeConfiguration,
+                traillingSwipeConfiguration: RowActionSwipeConfiguration = .empty ,
+                leadingSwipeConfiguration: RowActionSwipeConfiguration = .empty,
                 onTap: ((Cell.Model) -> Void)? = nil) {
         self.model = model
         self.onTap = onTap
@@ -60,6 +64,7 @@ public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell {
         let cell: Cell = tableView.dequeueCell(at: indexPath)
+        
         cell.configure(with: model)
         if isSelected {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
@@ -91,11 +96,11 @@ public struct TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusab
 // MARK: - Mutating Methods
 extension TableViewRow {
     
-    public mutating func addRowTrailingActions(_ actions: [RowAction]) {
+    public func addRowTrailingActions(_ actions: [RowAction]) {
         traillingSwipeConfiguration.actions.append(contentsOf: actions)
     }
     
-    public mutating func addRowLeadingActions(_ actions: [RowAction]) {
+    public func addRowLeadingActions(_ actions: [RowAction]) {
         leadingSwipeConfiguration.actions.append(contentsOf: actions)
     }
 }
@@ -104,24 +109,21 @@ extension TableViewRow {
 // MARK: - Immutable Methods
 extension TableViewRow {
     
-    public func addedRowTrailingActions(_ actions: [RowAction]) -> TableViewRow {
-        var mutable = self
-        mutable.addRowTrailingActions(actions)
-        return mutable
+    public func addedRowTrailingActions(_ actions: [RowAction]) -> Self {
+        addRowTrailingActions(actions)
+        return self
     }
     
-    public func addedRowLeadingActions(_ actions: [RowAction]) -> TableViewRow {
-        var mutable = self
-        mutable.addRowLeadingActions(actions)
-        return mutable
+    public func addedRowLeadingActions(_ actions: [RowAction]) -> Self {
+        addRowLeadingActions(actions)
+        return self
     }
     
     
-    public func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> TableViewRow {
-        var row = self
-        selectTableViewRow(tableView, at: indexPath, select: row.isSelected)
-        row.isSelected = !row.isSelected
-        return row
+    public func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Self {
+        selectTableViewRow(tableView, at: indexPath, select: isSelected)
+        isSelected = !isSelected
+        return self
     }
     
     private func selectTableViewRow(_ tableView: UITableView, at indexPath: IndexPath, select: Bool) {

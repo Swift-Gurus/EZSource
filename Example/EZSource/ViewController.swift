@@ -12,7 +12,6 @@ import EZSource
 
 class ViewController: UIViewController {
 
-
     var tableView: UITableView!
     var source: TableViewDataSource!
     var headers: [String: MutableHeaderFooterProvider<TestReusableViewWithButton>] = [:]
@@ -55,15 +54,13 @@ class ViewController: UIViewController {
         action.backgroundColor = .green
         var section = TableViewSection(id: "Test")
         let header = ImmutableHeaderFooterProvider<TestReusableView>.init(model: "My String header")
-//        section.addRows([row])
-//        section.addHeader(header)
-        
+
         var secondSection = TableViewSection(id: "Second Section")
         secondSection.addRows([row,row])
         let headerWithBottonModel = HeaderWithButtonModel(title: "My button Header \n jkljkjdflsjdlfkjs",
                                                           buttonText: "Collapse",
-                                                          collapsedText: "test") {
-            
+                                                          collapsedText: "test") { [weak row] in
+            row?.model = "CHANGING"
             self.source.collapseSection(secondSection, collapse: !(self.source.isSectionCollapsed(secondSection) ?? false))
                                                             
         }
