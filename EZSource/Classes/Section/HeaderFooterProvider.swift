@@ -59,7 +59,6 @@ public class MutableHeaderFooterProvider<View>: HeaderFooterProvider<View> where
         _lastModel = model
         _cachedView?.configure(with: model)
     }
-    
 }
 
 
