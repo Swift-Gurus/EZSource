@@ -23,7 +23,6 @@ public struct UpdateInfo: SectionUpdateInfo {
     }
 }
 
-
 public struct TableViewUpdates {
     public let deletedIndexes: [IndexPath]
     public let updatedIndexes: [IndexPath]
@@ -35,5 +34,26 @@ public struct TableViewUpdates {
         self.deletedIndexes = deletedIndexes
         self.updatedIndexes = updatedIndexes
         self.insertedIndexes = insertedIndexes
+    }
+}
+
+
+extension TableViewUpdates {
+    func added(deletedIndexes: [IndexPath]) -> Self {
+        .init(deletedIndexes: self.deletedIndexes + deletedIndexes,
+              updatedIndexes: updatedIndexes,
+              insertedIndexes: insertedIndexes)
+    }
+    
+    func added(updatedIndexes: [IndexPath]) -> Self {
+        .init(deletedIndexes: deletedIndexes,
+            updatedIndexes: self.updatedIndexes + updatedIndexes,
+            insertedIndexes: insertedIndexes)
+    }
+    
+    func added(insertedIndexes: [IndexPath]) -> Self {
+        .init(deletedIndexes: deletedIndexes,
+              updatedIndexes: updatedIndexes,
+              insertedIndexes: self.insertedIndexes + insertedIndexes)
     }
 }

@@ -7,19 +7,17 @@
 
 import Foundation
 
-protocol SectionHeaderFooterProvider  {
+public protocol SectionHeaderFooterProvider  {
     var title: String? { get }
     var height: CGFloat? { get }
     func headerView(forTableView: UITableView) -> UIView?
-    
 }
 
-
 public class HeaderFooterProvider<View>: SectionHeaderFooterProvider where View: Configurable & ReusableView {
-    var title: String?
+    public var title: String?
     
     let model: View.Model
-    let height: CGFloat?
+    public let height: CGFloat?
     
     public init(model: View.Model, height: CGFloat? = nil) {
         self.model = model
@@ -29,7 +27,6 @@ public class HeaderFooterProvider<View>: SectionHeaderFooterProvider where View:
     public func headerView(forTableView tableView: UITableView) -> UIView? {
        fatalError("\(self) SUBLCASSES SHOULD OVERRIDE")
     }
-    
 }
 
 public class ImmutableHeaderFooterProvider<View>: HeaderFooterProvider<View> where View: Configurable & ReusableView  {

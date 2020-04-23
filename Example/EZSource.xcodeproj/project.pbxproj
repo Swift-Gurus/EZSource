@@ -12,6 +12,13 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		895F4194244A649400AD944C /* SectionSourceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F4193244A649400AD944C /* SectionSourceTestCases.swift */; };
+		895F419A244BC95600AD944C /* SectionSourceTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F4191244A648600AD944C /* SectionSourceTester.swift */; };
+		895F419B244BE50600AD944C /* SectionalMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F4196244A673900AD944C /* SectionalMock.swift */; };
+		895F419D244BEB1200AD944C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F419C244BEB1200AD944C /* main.swift */; };
+		895F41A1244E65A300AD944C /* SectionableFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F41A0244E65A300AD944C /* SectionableFactoryMock.swift */; };
+		895F41A3244F2F9900AD944C /* SectionSourceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F41A2244F2F9900AD944C /* SectionSourceExtension.swift */; };
+		895F41A5245008DE00AD944C /* SectionUpdateSnapshotTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F41A4245008DE00AD944C /* SectionUpdateSnapshotTestCases.swift */; };
 		89A23DAE20C5FB11001A46AA /* UITableViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DAD20C5FB11001A46AA /* UITableViewExtensionTests.swift */; };
 		89A23DB120C5FB6D001A46AA /* UITableViewExtensionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DAF20C5FB4B001A46AA /* UITableViewExtensionTester.swift */; };
 		89A23DB220C5FBA4001A46AA /* MockTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DA820C5F9A2001A46AA /* MockTableView.swift */; };
@@ -52,6 +59,13 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F05DB45C56EE8E230A4B89D /* Pods_EZSource_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZSource_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FE75F6347D4B5C4D4367721 /* Pods_EZSource_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZSource_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		895F4191244A648600AD944C /* SectionSourceTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSourceTester.swift; sourceTree = "<group>"; };
+		895F4193244A649400AD944C /* SectionSourceTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSourceTestCases.swift; sourceTree = "<group>"; };
+		895F4196244A673900AD944C /* SectionalMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionalMock.swift; sourceTree = "<group>"; };
+		895F419C244BEB1200AD944C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		895F41A0244E65A300AD944C /* SectionableFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionableFactoryMock.swift; sourceTree = "<group>"; };
+		895F41A2244F2F9900AD944C /* SectionSourceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSourceExtension.swift; sourceTree = "<group>"; };
+		895F41A4245008DE00AD944C /* SectionUpdateSnapshotTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionUpdateSnapshotTestCases.swift; sourceTree = "<group>"; };
 		89A23DA820C5F9A2001A46AA /* MockTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTableView.swift; sourceTree = "<group>"; };
 		89A23DAC20C5FB10001A46AA /* EZSource_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EZSource_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		89A23DAD20C5FB11001A46AA /* UITableViewExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensionTests.swift; sourceTree = "<group>"; };
@@ -134,6 +148,7 @@
 		607FACD21AFB9204008FA782 /* Example for EZSource */ = {
 			isa = PBXGroup;
 			children = (
+				895F419C244BEB1200AD944C /* main.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -159,6 +174,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				895F4190244A62C600AD944C /* TableViewDataSource */,
 				89A23DB820C636B5001A46AA /* TableViewRow */,
 				89A23DAB20C5FAC3001A46AA /* Extensions */,
 				89A23DAA20C5FAB8001A46AA /* Mocks */,
@@ -184,6 +200,27 @@
 				E086BE354008674B9D4D5BD3 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		895F4190244A62C600AD944C /* TableViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				895F4195244A671C00AD944C /* Mock */,
+				895F4191244A648600AD944C /* SectionSourceTester.swift */,
+				895F4193244A649400AD944C /* SectionSourceTestCases.swift */,
+				895F41A4245008DE00AD944C /* SectionUpdateSnapshotTestCases.swift */,
+			);
+			name = TableViewDataSource;
+			sourceTree = "<group>";
+		};
+		895F4195244A671C00AD944C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				895F4196244A673900AD944C /* SectionalMock.swift */,
+				895F41A0244E65A300AD944C /* SectionableFactoryMock.swift */,
+				895F41A2244F2F9900AD944C /* SectionSourceExtension.swift */,
+			);
+			name = Mock;
 			sourceTree = "<group>";
 		};
 		89A23DA720C5F98E001A46AA /* Section */ = {
@@ -391,6 +428,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				89A23DCE20C71E02001A46AA /* TestReusableView.swift in Sources */,
+				895F419D244BEB1200AD944C /* main.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				89A23DCC20C71DEF001A46AA /* TestReusableViewWithButton.swift in Sources */,
 				89A23DCA20C71DC2001A46AA /* StringCell.swift in Sources */,
@@ -401,12 +439,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895F41A5245008DE00AD944C /* SectionUpdateSnapshotTestCases.swift in Sources */,
 				89A23DBF20C64021001A46AA /* RowActionTestCases.swift in Sources */,
 				89A23DBA20C636C6001A46AA /* TableViewRowTestCases.swift in Sources */,
+				895F4194244A649400AD944C /* SectionSourceTestCases.swift in Sources */,
 				89A23DBD20C63919001A46AA /* TableViewRowTester.swift in Sources */,
 				89A23DB120C5FB6D001A46AA /* UITableViewExtensionTester.swift in Sources */,
 				89A23DB220C5FBA4001A46AA /* MockTableView.swift in Sources */,
+				895F41A1244E65A300AD944C /* SectionableFactoryMock.swift in Sources */,
+				895F419B244BE50600AD944C /* SectionalMock.swift in Sources */,
+				895F41A3244F2F9900AD944C /* SectionSourceExtension.swift in Sources */,
 				89A23DB720C607F0001A46AA /* MockReusableView.swift in Sources */,
+				895F419A244BC95600AD944C /* SectionSourceTester.swift in Sources */,
 				89A23DB420C5FC84001A46AA /* MockReusableCell.swift in Sources */,
 				89A23DAE20C5FB11001A46AA /* UITableViewExtensionTests.swift in Sources */,
 			);

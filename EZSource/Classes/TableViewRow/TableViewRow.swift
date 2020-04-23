@@ -119,7 +119,6 @@ extension TableViewRow {
         return self
     }
     
-    
     public func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Self {
         selectTableViewRow(tableView, at: indexPath, select: isSelected)
         isSelected = !isSelected
