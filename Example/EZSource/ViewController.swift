@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var tableView: UITableView!
     var source: TableViewDataSource!
     var headers: [String: MutableHeaderFooterProvider<TestReusableViewWithButton>] = [:]
-    
+    var alertFactory = AlertFactory()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView(frame: .zero, style: .plain)
@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         source = TableViewDataSource(tableView: tableView,
                                      withTypes: [StringCell.self],
                                      reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
-        source.dynamicSections = true
         tableView.allowsMultipleSelection = true
 
         source.applyChanges([sectionWithTextLabelsUpdates, secondSectionUpdates])
@@ -46,7 +45,6 @@ class ViewController: UIViewController {
         }
         return MutableHeaderFooterProvider(model: model)
     }
-    
     
     private var sectionWithTextLabelsHeader: ImmutableHeaderFooterProvider<TestReusableView> {
         ImmutableHeaderFooterProvider<TestReusableView>(model: "Section with text labels")
@@ -68,6 +66,7 @@ class ViewController: UIViewController {
         let header = headerWithCollapseButton(for: id)
         updates.addHeader(header)
         let rows = getRows(count: 2)
+       
         rows.enumerated()
             .map({ ($0.element, IndexPath(row: $0.offset, section: 1)) })
             .forEach({ updates.addAddOperation($0.0, at: $0.1) })
@@ -137,63 +136,64 @@ extension ViewController {
         let actionSheet =  UIAlertController(title: "Action", message: "Done", preferredStyle: .actionSheet)
         actionSheet.addAction(addRowAction)
         actionSheet.addAction(deleteRow)
+        actionSheet.addAction(updateRowAction)
+        actionSheet.addAction(addRowsAction)
         actionSheet.addAction(dismissAction(for: actionSheet))
         self.present(actionSheet, animated: true, completion: nil)
     }
     
     
+    
+    private var addRowsAction: UIAlertAction {
+       alertFactory.inputRowAlertAction(title: "Add Multiple Rows",
+                                        config: .multipleRows,
+                                        actionHandler: { [weak self] numberOfRows,section, text  in
+                               self?.addRows(numberOfRows: numberOfRows, section: section, text: text)
+                                                   
+        })
+    }
+    
+    private var updateRowAction: UIAlertAction{
+        alertFactory.inputRowAlertAction(title: "Update Row",
+                                         actionHandler: { [weak self] row,section, text  in
+                               self?.updateRow(at: row, section: section, text: text)
+                                                   
+        })
+    }
+    
     private var addRowAction: UIAlertAction {
-        alertAction(title: "Add Row",
-                    actionHandler: { [weak self] row,section, text  in
-                        self?.addRow(at: row, section: section, text: text) })
+        alertFactory.inputRowAlertAction(title: "Add Row",
+                                         actionHandler: { [weak self] row,section, text  in
+               self?.addRow(at: row, section: section, text: text)
+        })
     }
     
     private var deleteRow: UIAlertAction {
-        alertAction(title: "Delete Row",
-                    actionHandler: { [weak self] row,section,_  in self?.deleteRow(at: row, section: section) })
+        alertFactory.deleteRowAlertAction(title: "Delete Row",
+                                          actionHandler: { [weak self] row,section in
+               self?.deleteRow(at: row, section: section)
+        })
+
     }
     
-    private func alertAction(title: String,
-                             actionHandler: @escaping (Int, Int, String) -> Void) -> UIAlertAction {
-        let input = inputAlert(title: title, actionHandler: actionHandler)
-        return UIAlertAction(title: title,
-                             style: .default) {  (_) in
-                        self.present(input, animated: true, completion: nil)
-        }
-    }
-    
-    private func inputAlert(title: String,
-                            actionHandler: @escaping (Int, Int, String) -> Void) -> UIAlertController {
-        var rowNumber: UITextField?
-        var sectionNumber: UITextField?
-        var text: UITextField?
-        let vc = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-
-        vc.addTextField { rowNumber = $0 }
-
-        vc.addTextField { sectionNumber = $0 }
-        
-        vc.addTextField { text = $0 }
-
-        let action = UIAlertAction(title: "OK", style: .default) {(_) in
-            defer {
-               vc.dismiss(animated: true, completion: nil)
-            }
-            guard let row = rowNumber?.text.flatMap({ Int($0)}),
-               let section = sectionNumber?.text.flatMap({ Int($0)}) else {
-                   return
-            }
-            actionHandler(row,section,text?.text ?? "")
-        }
-        vc.addAction(action)
-               
-        return vc
+    private func addRows(numberOfRows: Int, section: Int, text: String) {
+        var updates = TableViewSectionUpdate(sectionID: "\(section)")
+        stride(from: 0, to: numberOfRows, by: 1).map({ IndexPath(row: $0, section: section) })
+            .forEach({ updates.addAddOperation(createRow(title: text), at: $0)})
+        source.applyChanges([ updates ])
     }
     
     private func addRow(at index: Int, section: Int, text: String) {
         var updates = TableViewSectionUpdate(sectionID: "\(section)")
         let row = createRow(title: text)
         updates.addAddOperation(row, at: IndexPath(row: index, section: section))
+        source.applyChanges([updates])
+    }
+    
+    private func updateRow(at index: Int, section: Int, text: String) {
+        var updates = TableViewSectionUpdate(sectionID: "\(section)")
+        let row = createRow(title: text)
+        updates.addUpdateOperation(row, at: IndexPath(row: index, section: section))
         source.applyChanges([updates])
     }
     

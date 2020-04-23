@@ -30,6 +30,7 @@
 		89A23DCA20C71DC2001A46AA /* StringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DC920C71DC2001A46AA /* StringCell.swift */; };
 		89A23DCC20C71DEF001A46AA /* TestReusableViewWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DCB20C71DEF001A46AA /* TestReusableViewWithButton.swift */; };
 		89A23DCE20C71E02001A46AA /* TestReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A23DCD20C71E02001A46AA /* TestReusableView.swift */; };
+		89B3DECE24520790002EFC89 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B3DECD24520790002EFC89 /* AlertFactory.swift */; };
 		B7146C9A993B64722B6CB572 /* Pods_EZSource_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE75F6347D4B5C4D4367721 /* Pods_EZSource_Example.framework */; };
 		CD7B364AEDAF9673C7EFEC6C /* Pods_EZSource_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F05DB45C56EE8E230A4B89D /* Pods_EZSource_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		89A23DC920C71DC2001A46AA /* StringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCell.swift; sourceTree = "<group>"; };
 		89A23DCB20C71DEF001A46AA /* TestReusableViewWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReusableViewWithButton.swift; sourceTree = "<group>"; };
 		89A23DCD20C71E02001A46AA /* TestReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReusableView.swift; sourceTree = "<group>"; };
+		89B3DECD24520790002EFC89 /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		8B914676766BE4E9E1E40CCD /* Pods-EZSource_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZSource_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-EZSource_Example/Pods-EZSource_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BE80DED63532AA85914646C9 /* EZSource.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = EZSource.podspec; path = ../EZSource.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E086BE354008674B9D4D5BD3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				89A23DC920C71DC2001A46AA /* StringCell.swift */,
 				89A23DCB20C71DEF001A46AA /* TestReusableViewWithButton.swift */,
 				89A23DCD20C71E02001A46AA /* TestReusableView.swift */,
+				89B3DECD24520790002EFC89 /* AlertFactory.swift */,
 			);
 			name = "Example for EZSource";
 			path = EZSource;
@@ -430,6 +433,7 @@
 				89A23DCE20C71E02001A46AA /* TestReusableView.swift in Sources */,
 				895F419D244BEB1200AD944C /* main.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				89B3DECE24520790002EFC89 /* AlertFactory.swift in Sources */,
 				89A23DCC20C71DEF001A46AA /* TestReusableViewWithButton.swift in Sources */,
 				89A23DCA20C71DC2001A46AA /* StringCell.swift in Sources */,
 			);
