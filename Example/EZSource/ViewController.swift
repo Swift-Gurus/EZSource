@@ -36,9 +36,6 @@ class ViewController: UIViewController {
         createNavigationItem()
     }
 
-   
-    
-    
     private func headerWithCollapseButton(for setionID: String) -> MutableHeaderFooterProvider<TestReusableViewWithButton> {
         let model = HeaderWithButtonModel(title: "Section with button",
                                           buttonText: "Collapse",
@@ -165,7 +162,6 @@ extension ViewController {
         }
     }
     
-    
     private func inputAlert(title: String,
                             actionHandler: @escaping (Int, Int, String) -> Void) -> UIAlertController {
         var rowNumber: UITextField?
@@ -187,9 +183,7 @@ extension ViewController {
                let section = sectionNumber?.text.flatMap({ Int($0)}) else {
                    return
             }
-           
             actionHandler(row,section,text?.text ?? "")
-
         }
         vc.addAction(action)
                
