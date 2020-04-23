@@ -40,13 +40,13 @@ source.applyChanges([updates])
 #### Add Swipe actions to cells:
 - ##### Create Action
 ```swift
-		let action =  RowAction { [weak self] in
-			guard let `self` = self else { return }
-			let alertController = self.alertControllerExample
-			let act = self.dismissAction(for: alertController)
-			alertController.addAction(act)
-			self.present(alertController, animated: true, completion: nil)
-		}
+	let action =  RowAction { [weak self] in
+		guard let `self` = self else { return }
+		let alertController = self.alertControllerExample
+		let act = self.dismissAction(for: alertController)
+		alertController.addAction(act)
+		self.present(alertController, animated: true, completion: nil)
+	}
 ```
 - ##### Add Action to the Row as tralling or leading
 ```swift
