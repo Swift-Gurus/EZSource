@@ -25,14 +25,14 @@ let source = TableViewDataSource(tableView: tableView, withTypes: [StringCell.se
 
 - #### Create Rows
 ``` swift
-var row = TableViewRow<String, StringCell>(model: "My Row")
+var row = TableViewRow<StringCell>(model: "My Row")
 ```
-- #### Add Rows to the section and call reload
-Pass unique ID for every section if you use animated updates
+- #### Creating TableViewSectionUpdate
+   `TableViewSectionUpdate` provides API to config updates for different sections like animations, 
 ``` swift
-var section = TableViewSection(id: "Test")
-section.addRows([row])
-source.reload(with: [section])
+var updates = TableViewSectionUpdate(sectionID: "\(0)")
+updates.addAddOperation(row , at: IndexPath(row: 0, section: 0))
+source.applyChanges([updates])
 ```
 
 ## Advanced Usage
@@ -40,20 +40,18 @@ source.reload(with: [section])
 #### Add Swipe actions to cells:
 - ##### Create Action
 ```swift
-let action = RowAction { [weak self] in
-    let alertController = UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)
-    let act = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-        alertController.dismiss(animated: true, completion: nil)
-    
-    })
-    alertController.addAction(act)
-    self?.present(alertController, animated: true, completion: nil)
-}
+		let action =  RowAction { [weak self] in
+			guard let `self` = self else { return }
+			let alertController = self.alertControllerExample
+			let act = self.dismissAction(for: alertController)
+			alertController.addAction(act)
+			self.present(alertController, animated: true, completion: nil)
+		}
 ```
 - ##### Add Action to the Row as tralling or leading
 ```swift
-row.addRowLeadingActions([action])
-row.addRowTrailingActions([action])
+	row.addRowLeadingActions([action])
+	row.addRowTrailingActions([action])
 ```
 #### Add Headers/Footers to cells:
 - ##### Create a ReusableView 
@@ -69,7 +67,8 @@ final class TestReusableView: UITableViewHeaderFooterView, ReusableView, Configu
 ```
 - ##### Create Header/Footer
 ```swift
-let header = HeaderFooterProvider<String,TestReusableView>.init(model: "My String header")
+let header = ImmutableHeaderFooterProvider<TestReusableView>(model: "Section with text labels")
+let footer = ImmutableHeaderFooterProvider<TestReusableView>(model: "Footer with text labels")
 ```
 - ##### Add Header/Footer
 ```swift
@@ -96,8 +95,9 @@ pod 'EZSource'
 
 ## Author
 
-ALDO Inc., aldodev@adogroup.com
+Swift Gurus., alexei.hmelevski@gmail.com
 
 ## License
 
 EZSource is available under the MIT license. See the LICENSE file for more info.
+
