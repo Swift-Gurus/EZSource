@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 import SwiftyCollection
 
+enum UpdateOperation {
+    case delete(Int)
+    case update(Int, CellProvider)
+    case add(Int, CellProvider)
+}
+
 public struct TableViewSection: Sectionable {
 
     public private(set) var id: String
@@ -110,7 +116,6 @@ extension TableViewSection {
         }
         return mSelf
     }
-    
 }
 
 
@@ -174,54 +179,50 @@ extension TableViewSection: AnimatableSection {
         return mSelf
     }
     
-    private mutating func removeRow(at index: Int) {
-        guard index < rows.count else { return }
+    func updated(using operation: UpdateOperation) -> (TableViewSection, Bool){
+        var mSelf = self
+        let operationStatus: Bool
+        mSelf.headerProvider = self.headerProvider
+        mSelf.footerProvider = self.footerProvider
+        switch operation {
+        case let .delete(index):
+            operationStatus = mSelf.removeRow(at: index)
+        case let .add(index, cellItem):
+            operationStatus = mSelf.add(cellItem, at: index)
+        case let .update(index, cellItem):
+            operationStatus = mSelf.update(cellItem, at: index)
+        }
+        return (mSelf, operationStatus)
+    }
+    
+    
+    private mutating func removeRow(at index: Int) -> Bool {
+        guard index < rows.count else { return false }
         rows.remove(at: index)
+        return true
     }
     
     
-    private mutating func update(_ cellItem: CellProvider, at index: Int) {
-        guard index < rows.count else { return }
+    private mutating func update(_ cellItem: CellProvider, at index: Int) -> Bool {
+        guard index < rows.count else { return false }
         rows[index] = cellItem
+        return true
     }
     
     
-    private mutating func add(_ cellItem: CellProvider, at index: Int) {
-        guard index <= rows.count else { return }
+    private mutating func add(_ cellItem: CellProvider, at index: Int) -> Bool {
+        guard index <= rows.count else { return false }
         rows.insert(cellItem, at: index)
+        return true
     }
     
 }
+
 
 public protocol Identifiable {
     var id: String { get }
 }
 
-// MARK: - Sectionable
-protocol Sectionable: Identifiable {
-    var numberOfRows: Int { get }
-    var rows: [CellProvider] { get }
-    var headerProvider: SectionHeaderFooterProvider? { get  set }
-    var footerProvider: SectionHeaderFooterProvider? { get set }
-    var collapsed: Bool { get }
-    func collapsedCopy(_ flag: Bool) -> Self
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    func traillingActionsForRow(at index: Int) -> [UIContextualAction]
-    func leadingActionsForRow(at index: Int) -> [UIContextualAction]
-    func headerView(forTableView: UITableView) -> UIView?
-    func tapOnRow(at index: Int)
-    func updated(with cellItem: CellProvider?,deletedIndex: Int?, updatedIndex: Int?, addedIndex: Int?) -> Self
-    func expandCollapseSection(in tableView: UITableView, at index: Int)
-    func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Sectionable
-    func reload(in tableView: UITableView, at index: Int) 
-}
 
-// MARK: - AnimatableSection
-public protocol AnimatableSection {
-    var animationConfig: AnimationConfig { get }
-    func deleteRows(in tableView: UITableView, at indexPaths: [IndexPath])
-    func updateRows(in tableView: UITableView, at indexPaths: [IndexPath])
-    func insertRows(in tableView: UITableView, at indexPaths: [IndexPath])
-  
-}
+
 

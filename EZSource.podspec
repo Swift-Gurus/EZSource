@@ -8,19 +8,19 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
-  s.version          = '0.3.1'
+  s.version          = '0.4.0'
   s.summary          = 'Declarative Datasource/Delegate for TableView'
 
 
   s.description      = <<-DESC
   This library helps to avoid boilerplate code when operating with TableView. Just create Rows add them
-  to sections. Append Headers/Footers to sections and use reload or updateWithAnimation
+  to sections. Append Headers/Footers to sections and use reload or updateWithAnimation. Provides easy api for animated updates
                        DESC
 
-  s.homepage         = 'https://github.com/aldo-dev/EZSource.git'
+  s.homepage         = 'https://github.com/Swift-Gurus/EZSource.git'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'ALDO Inc' => 'aldodev@aldogroup.com' }
-  s.source           = { :git => 'https://github.com/aldo-dev/EZSource.git', :tag => s.version.to_s }
+  s.author           = { 'Swift Gurus' => 'alexei.hmelevski@gmail.com' }
+  s.source           = { :git => 'https://github.com/Swift-Gurus/EZSource.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
   s.swift_version   = '5.0'

@@ -3,7 +3,7 @@
 //  EZSource_Tests
 //
 //  Created by Alex Hmelevski on 2018-06-04.
-//  Copyright © 2018 CocoaPods. All rights reserved.
+//  Copyright (c) 2020 AlexHmelevskiAG. All rights reserved.
 //
 
 import XCTest
@@ -11,7 +11,6 @@ import XCTest
 
 class TableViewRowTestCases: XCTestCase {
     
-   
     var tester = TableViewRowTester()
    
     override func setUp() {

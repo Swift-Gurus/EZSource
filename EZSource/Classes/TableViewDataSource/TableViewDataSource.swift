@@ -17,11 +17,13 @@ extension UISwipeActionsConfiguration {
 open class TableViewDataSource: NSObject  {
     
     var source = SectionSource()
+    public var animationConfig = AnimationConfig()
     public var dynamicSections = false
     var tv: UITableView
     public init(tableView: UITableView,
                 withTypes types: [ReusableCell.Type],
                 reusableViews: [ReusableView.Type] = []) {
+        
         tv = tableView
         super.init()
         tableView.dataSource = self
@@ -33,9 +35,9 @@ open class TableViewDataSource: NSObject  {
         reusableViews.forEach({ tableView.registerFooterHeader(reusableViewType: $0) })
     }
     
-    public func isSectionCollapsed(_ section: TableViewSection) -> Bool? {
-        return source.indexOfSection(section).map({ source.section(at: $0) })
-                                             .map({ $0.collapsed })
+    public func isSectionCollapsed(_ sectionID: String) -> Bool? {
+        return source.indexOfSection(sectionID).map({ source.section(at: $0) })
+                                               .map({ $0.collapsed })
     }
     
     public func reload(with sections: [TableViewSection]) {
@@ -43,8 +45,8 @@ open class TableViewDataSource: NSObject  {
         tv.reloadData()
     }
     
-    public func collapseSection(_ section: TableViewSection, collapse: Bool) {
-        guard let index = source.indexOfSection(section) else { return }
+    public func collapseSection(_ sectionID: String, collapse: Bool) {
+        guard let index = source.indexOfSection(sectionID)else { return }
         tv.performBatchUpdates({[ weak self] in
             guard let `self` = self else { return }
             let new = source.sections[index].collapsedCopy(collapse)
@@ -52,12 +54,8 @@ open class TableViewDataSource: NSObject  {
             new.expandCollapseSection(in: self.tv, at: index)
         }, completion: nil)
     }
-    
-    
-    public func updateVisibleSections(updates: [UpdateInfo]) {
-        
-    }
-    
+
+    @available(*, deprecated)
     public func updateWithAnimation(updates: [UpdateInfo]) {
         guard !source.sections.isEmpty else {
             reload(with: updates.map({ $0.section }))
@@ -76,17 +74,17 @@ open class TableViewDataSource: NSObject  {
             updates.filter({!$0.section.collapsed})
                    .forEach({ self.launchUpdates(in: self.tv, with: $0) })
             
-            }, completion: nil)
+        }, completion: nil)
     }
     
+    @available(*, deprecated)
     public func updateNoAnimation(updates: [UpdateInfo]) {
         source.update(withInfo: updates)
         tv.reloadData()
     }
     
     private func launchUpdates(in tableView: UITableView, with info : UpdateInfo) {
-        
-        
+    
         if !info.changes.deletedIndexes.isEmpty {
             info.section.deleteRows(in: tableView, at: info.changes.deletedIndexes)
         }
@@ -99,8 +97,6 @@ open class TableViewDataSource: NSObject  {
             info.section.insertRows(in: tableView, at: info.changes.insertedIndexes)
         }
     }
-    
-    
 }
 
 
@@ -146,8 +142,8 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     private func selectRow(of tableView: UITableView, at indexPath: IndexPath) {
-      let section = source.section(at: indexPath.section).selectingRow(of: tableView, at: indexPath)
-      source.replace(section: section)
+        let section = source.section(at: indexPath.section).selectingRow(of: tableView, at: indexPath)
+        source.replace(section: section)
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -167,7 +163,7 @@ extension TableViewDataSource: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+    
         return source.section(at: indexPath.section)
                      .rows
                      .element(at: indexPath.row)
@@ -189,3 +185,65 @@ extension TableViewDataSource: UITableViewDelegate {
         return (section.numberOfRows == 0 && dynamicSections && !section.collapsed)
     }
 }
+
+
+// MARK: - NEW API
+extension TableViewDataSource {
+    public func applyChanges(_ changes: [TableViewSectionUpdate]) {
+               
+       tv.performBatchUpdates({[weak self] in
+           guard let `self` = self else { return }
+           self.sourceUpdate(with: changes, for: self.tv)
+                    
+        }, completion: nil)
+    }
+    
+    private func sourceUpdate(with changes: [TableViewSectionUpdate], for tableView: UITableView)  {
+        let snapShot = source.update(with: changes)
+        processSectionUpdates(in: tableView, snapshot: snapShot.indexesSnaphot)
+        
+        snapShot.sectionSnapshots
+                .enumerated()
+                .filter({ !snapShot.indexesSnaphot.contains($0.offset) })
+                .map({ $0.element})
+                .forEach({ launchUpdates(in: tableView, with: $0) })
+    }
+    
+    
+    private func processSectionUpdates(in tableView: UITableView,
+                                       snapshot: IndexesSnapshot<Int>) {
+        if !snapshot.removed.isEmpty {
+            tableView.deleteSections(IndexSet(snapshot.removed),
+                                     with: animationConfig.deleteAnimation)
+        }
+        
+        if !snapshot.updated.isEmpty {
+            tableView.reloadSections(IndexSet(snapshot.updated),
+                                     with: animationConfig.updateAnimation)
+        }
+        
+        if !snapshot.inserted.isEmpty {
+            tableView.insertSections(IndexSet(snapshot.inserted),
+                                     with: animationConfig.insertAnimation)
+        }
+    }
+
+    private func launchUpdates(in tableView: UITableView,
+                               with snapshot: SectionUpdateSnapshot) {
+        let indexesSnapshot = snapshot.indexesSnapshot
+        
+        if !indexesSnapshot.removed.isEmpty {
+            snapshot.section.deleteRows(in: tableView, at: indexesSnapshot.removed)
+         }
+         
+         if !indexesSnapshot.updated.isEmpty {
+             snapshot.section.updateRows(in: tableView, at: indexesSnapshot.updated)
+         }
+         
+         if !indexesSnapshot.inserted.isEmpty {
+             snapshot.section.insertRows(in: tableView, at: indexesSnapshot.inserted)
+         }
+     }
+}
+
+

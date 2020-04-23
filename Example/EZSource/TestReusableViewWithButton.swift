@@ -3,12 +3,13 @@
 //  EZSource_Example
 //
 //  Created by Alex Hmelevski on 2018-06-05.
-//  Copyright © 2018 CocoaPods. All rights reserved.
+//  Copyright (c) 2018 AlexHmelevskiAG. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import EZSource
+
 public struct HeaderWithButtonModel {
     public let title: String
     public let buttonText: String

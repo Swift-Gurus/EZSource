@@ -30,10 +30,11 @@ final class StringCell: UITableViewCell, ReusableCell, Configurable {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
         if selected {
            accessoryType = .checkmark
         } else {
-            accessoryType = .none
+           accessoryType = .none
         }
         super.setSelected(selected, animated: animated)
         
