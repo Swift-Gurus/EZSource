@@ -33,10 +33,10 @@ platform :ios do
     if git_tag_exists(tag: version)
     UI.user_error!("The tag #{version} already exists on the repo. To release a new version of the library bump the version on #{@podspec_name}")
     end
-    pod_lib_lint
+    pod_lib_lint(allow_warnings: true)
     add_git_tag(tag: "#{version}")
     push_git_tags
-    pod_push
+    pod_push(allow_warnings: true)
  end
 
 #Ending platform :ios do
