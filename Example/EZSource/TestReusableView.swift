@@ -36,4 +36,8 @@ final class TestReusableView: UITableViewHeaderFooterView, ReusableView, Configu
     func configure(with txt: String) {
         label.text = txt
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }

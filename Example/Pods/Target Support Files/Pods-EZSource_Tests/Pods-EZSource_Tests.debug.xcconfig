@@ -1,7 +1,7 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/EZSource" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyCollection"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/EZSource" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyCollection" "${PODS_CONFIGURATION_BUILD_DIR}/xDiffCollection"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/EZSource/EZSource.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyCollection/SwiftyCollection.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "EZSource" -framework "SwiftyCollection"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/EZSource/EZSource.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyCollection/SwiftyCollection.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/xDiffCollection/xDiffCollection.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "EZSource" -framework "SwiftyCollection" -framework "xDiffCollection"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

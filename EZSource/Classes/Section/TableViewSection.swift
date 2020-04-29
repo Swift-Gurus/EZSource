@@ -139,14 +139,17 @@ extension TableViewSection: AnimatableSection {
     
     
     func expandCollapseSection(in tableView: UITableView, at index: Int) {
+        
         collapsed ? collapseSection(in: tableView, at: index) : expandSection(in: tableView, at: index)
     }
     
     func expandSection(in tableView: UITableView, at index: Int) {
+//        tableView.reloadSections([index], with: animationConfig.expandAnimation)
         tableView.insertRows(at: indexPaths(atIndex: index), with: animationConfig.expandAnimation)
     }
     
     func collapseSection(in tableView: UITableView, at index: Int) {
+//          tableView.reloadSections([index], with: animationConfig.expandAnimation)
         tableView.deleteRows(at: indexPaths(atIndex: index), with: animationConfig.collapseAnimation)
     }
     

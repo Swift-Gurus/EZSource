@@ -36,16 +36,15 @@ public class ImmutableHeaderFooterProvider<View>: HeaderFooterProvider<View> whe
         view.configure(with: model)
         return view.uiView
     }
-    
 }
 
 public class MutableHeaderFooterProvider<View>: HeaderFooterProvider<View> where View: Configurable & ReusableView {
     
     private var _cachedView: View?
     private var _lastModel: View.Model?
+    
     public override func headerView(forTableView tableView: UITableView) -> UIView? {
-        guard _cachedView == nil else { return   _cachedView?.uiView }
-        
+        guard _cachedView == nil else { return _cachedView?.uiView }
         let view: View = tableView.dequeueView()
         view.configure(with: _lastModel ?? model)
         _cachedView = view

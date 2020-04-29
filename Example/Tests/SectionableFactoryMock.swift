@@ -27,8 +27,8 @@ final class SectionableFactoryMock {
     func defaultSectionUpdated(withID id: String) -> SectionalMock<MockReusableCell> {
         defaultSection(with: id, rowNames: updatedRowNames)
     }
-    
-     func defaultSectionUpdates(withID id: String,newNames: [String]) -> [TableViewSectionUpdate]  {
+     
+    func defaultSectionUpdates(withID id: String,newNames: [String]) -> [TableViewSectionUpdate]  {
         let updates = defaultSectionUpdates(withID: id, for: newNames) { (section, row, path) in
             section.addUpdateOperation(row, at: path)
         }

@@ -189,6 +189,7 @@ extension TableViewDataSource: UITableViewDelegate {
 
 // MARK: - NEW API
 extension TableViewDataSource {
+    @available(*, deprecated)
     public func applyChanges(_ changes: [TableViewSectionUpdate]) {
                
        tv.performBatchUpdates({[weak self] in
@@ -197,7 +198,7 @@ extension TableViewDataSource {
                     
         }, completion: nil)
     }
-    
+    @available(*, deprecated)
     private func sourceUpdate(with changes: [TableViewSectionUpdate], for tableView: UITableView)  {
         let snapShot = source.update(with: changes)
         processSectionUpdates(in: tableView, snapshot: snapShot.indexesSnaphot)

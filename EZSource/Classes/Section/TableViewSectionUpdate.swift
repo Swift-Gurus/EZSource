@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(*, deprecated)
 public struct TableViewSectionUpdate: Hashable {
 
     public func hash(into hasher: inout Hasher) {
@@ -49,6 +50,7 @@ public struct TableViewSectionUpdate: Hashable {
 
 
 // MARK: - Mutating Methods
+
 extension TableViewSectionUpdate {
     public mutating func addUpdateOperation<Cell>(_ row: TableViewRow<Cell>, at indexPath: IndexPath) where Cell: Configurable & ReusableCell {
         self.operations.append(.update(indexPath, row))
