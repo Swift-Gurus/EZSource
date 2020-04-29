@@ -10,12 +10,24 @@ import Foundation
 import UIKit
 import EZSource
 
+struct StringCellModel: Hashable {
+    let uniqueID: String
+    let text: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uniqueID)
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.text == rhs.text
+    }
+}
 
 final class StringCell: UITableViewCell, ReusableCell, Configurable {
-    typealias Model = String
+    typealias Model = StringCellModel
     let checkmarkView = UIView()
-    func configure(with text: String) {
-        textLabel?.text = text
+    func configure(with model: StringCellModel) {
+        textLabel?.text = "ID: \(model.uniqueID): \(model.text)"
         selectionStyle = .none
     }
     

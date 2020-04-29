@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CellProvider: TappableCell,CellDequeuer,CellActionsProvider ,Selectable { }
+protocol CellProvider: TappableCell,CellDequeuer,CellActionsProvider, Selectable { }
 
 struct CellActionSwipeConfiguration {
     let contextualActions: [UIContextualAction]
@@ -25,6 +25,7 @@ protocol TappableCell {
 
 protocol Selectable {
     func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Self
+    func selectRow(of tableView: UITableView, at indexPath: IndexPath)
 }
 
 protocol CellDequeuer {
@@ -52,6 +53,7 @@ public class TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusabl
     public var traillingSwipeConfiguration: RowActionSwipeConfiguration
     public var leadingSwipeConfiguration: RowActionSwipeConfiguration
     var isSelected: Bool = false
+    
     public init(model: Cell.Model,
                 traillingSwipeConfiguration: RowActionSwipeConfiguration = .empty ,
                 leadingSwipeConfiguration: RowActionSwipeConfiguration = .empty,
@@ -63,6 +65,7 @@ public class TableViewRow<Cell>: CellProvider where Cell: Configurable & Reusabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) throws -> UITableViewCell {
+        
         let cell: Cell = tableView.dequeueCell(at: indexPath)
         
         cell.configure(with: model)
@@ -119,6 +122,11 @@ extension TableViewRow {
         return self
     }
     
+    public func selectRow(of tableView: UITableView, at indexPath: IndexPath) {
+        selectTableViewRow(tableView, at: indexPath, select: isSelected)
+        isSelected = !isSelected
+    }
+    
     public func selectingRow(of tableView: UITableView, at indexPath: IndexPath) -> Self {
         selectTableViewRow(tableView, at: indexPath, select: isSelected)
         isSelected = !isSelected
@@ -134,3 +142,13 @@ extension TableViewRow {
     }
 }
 
+extension TableViewRow: Hashable, Equatable where Cell.Model: Hashable & Equatable {
+    public static func == (lhs: TableViewRow<Cell>, rhs: TableViewRow<Cell>) -> Bool {
+        lhs.model == rhs.model
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(model)
+    }
+    
+}

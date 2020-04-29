@@ -163,10 +163,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/EZSource/EZSource.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyCollection/SwiftyCollection.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/xDiffCollection/xDiffCollection.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/EZSource/EZSource.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyCollection/SwiftyCollection.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/xDiffCollection/xDiffCollection.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

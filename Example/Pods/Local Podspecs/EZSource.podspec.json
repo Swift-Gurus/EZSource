@@ -1,6 +1,6 @@
 {
   "name": "EZSource",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "summary": "Declarative Datasource/Delegate for TableView",
   "description": "This library helps to avoid boilerplate code when operating with TableView. Just create Rows add them\nto sections. Append Headers/Footers to sections and use reload or updateWithAnimation. Provides easy api for animated updates",
   "homepage": "https://github.com/Swift-Gurus/EZSource.git",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Swift-Gurus/EZSource.git",
-    "tag": "0.4.0"
+    "tag": "0.4.1"
   },
   "platforms": {
     "ios": "11.0"
@@ -22,6 +22,9 @@
   "source_files": "EZSource/Classes/**/*",
   "dependencies": {
     "SwiftyCollection": [
+
+    ],
+    "xDiffCollection": [
 
     ]
   },

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EZSource'
-  s.version          = '0.4.1'
+  s.version          = '1.0.0'
   s.summary          = 'Declarative Datasource/Delegate for TableView'
 
 
@@ -27,5 +27,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'EZSource/Classes/**/*'
   s.dependency 'SwiftyCollection'
+  s.dependency 'xDiffCollection'
 
 end

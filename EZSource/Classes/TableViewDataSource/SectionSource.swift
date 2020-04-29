@@ -78,13 +78,13 @@ class SectionSource {
 
 // MARK: - NEW API
 extension SectionSource {
-    
+    @available(*, deprecated)
     func update(with sectionsUpdates: [TableViewSectionUpdate]) -> UpdateSourceSnapshot {
         let snapshots = sectionsUpdates.map(update)
         let indexesSnapshot = updateSource(with: snapshots)
         return UpdateSourceSnapshot(sectionSnapshots: snapshots, indexesSnaphot: indexesSnapshot)
     }
-    
+    @available(*, deprecated)
     private func update(using sectionUpdate: TableViewSectionUpdate) -> SectionUpdateSnapshot {
         var section = self.section(for: sectionUpdate)
         applyHeaderFooterChanges(sectionUpdate.headerProviderUpdate,
@@ -96,6 +96,7 @@ extension SectionSource {
         return sectionUpdate.operations.reduce(snapshot, applyOperation)
     }
     
+    @available(*, deprecated)
     private func applyHeaderFooterChanges(_ changes: TableViewSectionUpdate.HeaderFooterUpdate,
                                           appliedValue: (SectionHeaderFooterProvider?) -> Void)  {
         switch changes {
@@ -120,10 +121,12 @@ extension SectionSource {
         return indexesSnapshot
     }
 
+    @available(*, deprecated)
     private func section(for sectionUpdate: TableViewSectionUpdate) -> Sectionable {
         return sections.first(where: { $0.id == sectionUpdate.id }) ?? TableViewSection(id: sectionUpdate.id)
     }
-      
+    
+    @available(*, deprecated)
     private func applyOperation(to snapshot: SectionUpdateSnapshot,
                                 operation: TableViewSectionUpdate.UpdateOperation) -> SectionUpdateSnapshot {
      

@@ -13,7 +13,7 @@ import UIKit
 final class AlertFactory {
     func inputRowAlert(title: String,
                        config: AlertPlaceHoldersConfig,
-                       actionHandler: @escaping (Int, Int, String) -> Void) -> UIAlertController {
+                       actionHandler: @escaping (String, String, String) -> Void) -> UIAlertController {
         var rowNumber: UITextField?
         var sectionNumber: UITextField?
         var text: UITextField?
@@ -33,8 +33,8 @@ final class AlertFactory {
             defer {
                vc.dismiss(animated: true, completion: nil)
             }
-            guard let row = rowNumber?.text.flatMap({ Int($0)}),
-               let section = sectionNumber?.text.flatMap({ Int($0)}) else {
+            guard let row = rowNumber?.text,
+               let section = sectionNumber?.text else {
                    return
             }
             actionHandler(row,section,text?.text ?? "")
@@ -86,7 +86,7 @@ final class AlertFactory {
     
     func inputRowAlertAction(title: String,
                              config: AlertPlaceHoldersConfig = .inputOneRow,
-                             actionHandler: @escaping (Int, Int, String) -> Void) -> UIAlertAction {
+                             actionHandler: @escaping (String, String, String) -> Void) -> UIAlertAction {
         let vc = UIApplication.shared.keyWindow?.rootViewController
         let input = inputRowAlert(title: title,
                                   config: config,
@@ -104,14 +104,14 @@ final class AlertFactory {
         let bottom: String
         
         static var inputOneRow: Self {
-            .init(top: "Input Row Number",
-                  middle: "Input Section Number",
+            .init(top: "Input Row ID",
+                  middle: "Input Section ID",
                   bottom: "Row Value")
         }
         
         static var multipleRows: Self {
             .init(top: "Input number of rows",
-                  middle: "Input Section Number",
+                  middle: "Input Section ID",
                   bottom: "Rows Value")
         }
     }

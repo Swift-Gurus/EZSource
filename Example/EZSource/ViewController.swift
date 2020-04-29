@@ -12,9 +12,12 @@ import EZSource
 class ViewController: UIViewController {
 
     var tableView: UITableView!
-    var source: TableViewDataSource!
+    var source: DiffableTableViewDataSource!
     var headers: [String: MutableHeaderFooterProvider<TestReusableViewWithButton>] = [:]
     var alertFactory = AlertFactory()
+    let section1ID = "section1ID"
+    let section2ID = "section2ID"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView = UITableView(frame: .zero, style: .plain)
@@ -25,68 +28,55 @@ class ViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-
-        source = TableViewDataSource(tableView: tableView,
-                                     withTypes: [StringCell.self],
-                                     reusableViews: [TestReusableView.self,TestReusableViewWithButton.self])
+        
+        let config = DiffableTableViewDataSource.Config(tableView: tableView,
+                                                        cellTypes: [StringCell.self],
+                                                        headerFooters: [TestReusableView.self,
+                                                                        TestReusableViewWithButton.self])
+        source = DiffableTableViewDataSource(config: config)
         tableView.allowsMultipleSelection = true
 
-        source.applyChanges([sectionWithTextLabelsUpdates, secondSectionUpdates])
+        source.update(sections: [sectionWithTextLabelsUpdates, secondSectionUpdates])
+    
         createNavigationItem()
     }
 
-    private func headerWithCollapseButton(for setionID: String) -> MutableHeaderFooterProvider<TestReusableViewWithButton> {
-        let model = HeaderWithButtonModel(title: "Section with button",
-                                          buttonText: "Collapse",
-                                          collapsedText: "Expand") { [weak self] in
-            guard let `self` = self,
-            let collapsedFlag = self.source.isSectionCollapsed(setionID) else { return }
-            self.source.collapseSection(setionID, collapse: !collapsedFlag)
-        }
-        return MutableHeaderFooterProvider(model: model)
+    private func immutableHeader(for id: String) -> ImmutableHeaderFooterProvider<TestReusableView> {
+        ImmutableHeaderFooterProvider<TestReusableView>(model: "Immutable Header. Section: \(id)")
     }
     
-    private var sectionWithTextLabelsHeader: ImmutableHeaderFooterProvider<TestReusableView> {
-        ImmutableHeaderFooterProvider<TestReusableView>(model: "Section with text labels")
-    }
-    
-    private var sectionWithTextLabelsUpdates: TableViewSectionUpdate {
-        var updates = TableViewSectionUpdate(sectionID: "\(0)")
-        updates.addHeader(sectionWithTextLabelsHeader)
-        let rows = getRows(count: 2)
-        rows.enumerated()
-            .map({ ($0.element, IndexPath(row: $0.offset, section: 0)) })
-            .forEach({ updates.addAddOperation($0.0, at: $0.1) })
-       return updates
-    }
-    
-    private var secondSectionUpdates: TableViewSectionUpdate {
-        let id = "\(1)"
-        var updates = TableViewSectionUpdate(sectionID: id)
-        let header = headerWithCollapseButton(for: id)
-        updates.addHeader(header)
-        let rows = getRows(count: 2)
-       
-        rows.enumerated()
-            .map({ ($0.element, IndexPath(row: $0.offset, section: 1)) })
-            .forEach({ updates.addAddOperation($0.0, at: $0.1) })
+    private var sectionWithTextLabelsUpdates: TableViewDiffableSection {
+        let updates = TableViewDiffableSection(id: "\(section1ID)")
+        updates.addHeader(immutableHeader(for: section1ID))
+        let ids = stride(from: 0, to: 3, by: 1).map({ "Row\($0)"})
+        let rows = getRows(with: ids)
+        updates.addRows(rows)
         return updates
     }
     
-    private var textLabelRow: TableViewRow<StringCell> {
-        createRow(title: "My row")
+    private var secondSectionUpdates: TableViewDiffableSection {
+        let updates = TableViewDiffableSection(id: section2ID)
+        let header = headerWithCollapseButton(for: section2ID)
+        updates.addHeader(header)
+        updates.settings.collapsed = true
+        let ids = stride(from: 3, to: 10, by: 1).map({ "Row\($0)"})
+        let rows = getRows(with: ids)
+        updates.addRows(rows)
+        return updates
     }
+
     
-    private func createRow(title: String) -> TableViewRow<StringCell>  {
-        let row = TableViewRow<StringCell>(model: title,
+    private func createRow(with ID: String, title: String) -> TableViewRow<StringCell>  {
+        let model = StringCellModel(uniqueID: ID, text: title)
+        let row = TableViewRow<StringCell>(model: model,
                                            onTap: { debugPrint("tapped with \($0)")})
         row.addRowLeadingActions(leadingActions)
         row.addRowTrailingActions(trailingActions)
         return row
     }
     
-    private func getRows(count: Int) -> [TableViewRow<StringCell>] {
-        stride(from: 0, to: count, by: 1).map({ _ in textLabelRow})
+    private func getRows(with ids: [String]) -> [TableViewRow<StringCell>] {
+        ids.map({ createRow(with: $0, title: "Default")})
     }
     
     private var rowAction: RowAction {
@@ -113,6 +103,17 @@ class ViewController: UIViewController {
         return [action]
     }
     
+    
+    private func headerWithCollapseButton(for setionID: String) -> MutableHeaderFooterProvider<TestReusableViewWithButton> {
+        let model = HeaderWithButtonModel(title: "Section with button: Section ID: \(setionID)",
+                                          buttonText: "Collapse",
+                                          collapsedText: "Expand") { [weak self] in
+                                            self?.source.autoCollapseExpandSection(with: setionID)
+        }
+        return MutableHeaderFooterProvider(model: model)
+    }
+    
+    
     private var alertControllerExample: UIAlertController {
         UIAlertController(title: "Action", message: "Done", preferredStyle: .alert)
     }
@@ -135,28 +136,17 @@ extension ViewController {
     @objc func showActionList() {
         let actionSheet =  UIAlertController(title: "Action", message: "Done", preferredStyle: .actionSheet)
         actionSheet.addAction(addRowAction)
-        actionSheet.addAction(deleteRow)
         actionSheet.addAction(updateRowAction)
-        actionSheet.addAction(addRowsAction)
         actionSheet.addAction(dismissAction(for: actionSheet))
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    
-    
-    private var addRowsAction: UIAlertAction {
-       alertFactory.inputRowAlertAction(title: "Add Multiple Rows",
-                                        config: .multipleRows,
-                                        actionHandler: { [weak self] numberOfRows,section, text  in
-                               self?.addRows(numberOfRows: numberOfRows, section: section, text: text)
-                                                   
-        })
-    }
+
     
     private var updateRowAction: UIAlertAction{
         alertFactory.inputRowAlertAction(title: "Update Row",
                                          actionHandler: { [weak self] row,section, text  in
-                               self?.updateRow(at: row, section: section, text: text)
+                                            self?.addUpdateRow(with: row, section: section, text: text)
                                                    
         })
     }
@@ -164,7 +154,7 @@ extension ViewController {
     private var addRowAction: UIAlertAction {
         alertFactory.inputRowAlertAction(title: "Add Row",
                                          actionHandler: { [weak self] row,section, text  in
-               self?.addRow(at: row, section: section, text: text)
+              self?.addUpdateRow(with: row, section: section, text: text)
         })
     }
     
@@ -173,33 +163,23 @@ extension ViewController {
                                           actionHandler: { [weak self] row,section in
                self?.deleteRow(at: row, section: section)
         })
+    }
+    
+    private func addUpdateRow(with ID: String, section: String, text: String) {
+        let sectionChanges = TableViewDiffableSection(id: "\(section)")
+        let row = createRow(with: ID, title: text)
+        sectionChanges.addRows([row])
+        source.update(sections: [sectionChanges])
+    }
+    
 
-    }
-    
-    private func addRows(numberOfRows: Int, section: Int, text: String) {
-        var updates = TableViewSectionUpdate(sectionID: "\(section)")
-        stride(from: 0, to: numberOfRows, by: 1).map({ IndexPath(row: $0, section: section) })
-            .forEach({ updates.addAddOperation(createRow(title: text), at: $0)})
-        source.applyChanges([ updates ])
-    }
-    
-    private func addRow(at index: Int, section: Int, text: String) {
-        var updates = TableViewSectionUpdate(sectionID: "\(section)")
-        let row = createRow(title: text)
-        updates.addAddOperation(row, at: IndexPath(row: index, section: section))
-        source.applyChanges([updates])
-    }
-    
-    private func updateRow(at index: Int, section: Int, text: String) {
-        var updates = TableViewSectionUpdate(sectionID: "\(section)")
-        let row = createRow(title: text)
-        updates.addUpdateOperation(row, at: IndexPath(row: index, section: section))
-        source.applyChanges([updates])
-    }
     
     private func deleteRow(at index: Int, section: Int) {
-        var updates = TableViewSectionUpdate(sectionID: "\(section)")
-        updates.addDeleteOperation(at: IndexPath(row: index, section: section))
-        source.applyChanges([updates])
+//        var updates = TableViewSectionUpdate(sectionID: "\(section)")
+//        updates.addDeleteOperation(at: IndexPath(row: index, section: section))
+//        source.applyChanges([updates])
     }
+    
+    
+    
 }
