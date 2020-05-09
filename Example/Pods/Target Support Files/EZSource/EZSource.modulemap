@@ -1,6 +1,0 @@
-framework module EZSource {
-  umbrella header "EZSource-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,9 +1,0 @@
-use_frameworks!
-
-target 'EZSource_Example' do
-  pod 'EZSource', :path => '../'
-
-  target 'EZSource_Tests' do
-    inherit! :search_paths
-  end
-end

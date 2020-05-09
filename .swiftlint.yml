@@ -1,0 +1,83 @@
+disabled_rules: # rule identifiers to exclude from running
+  - generic_type_name
+  - identifier_name
+  - type_name
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - discouraged_optional_collection
+  - comma
+  - control_statement
+  - first_where
+  - closure_body_length
+  - closure_end_indentation
+  - closure_parameter_position
+  - closure_spacing
+  - collection_alignment
+  - contains_over_first_not_nil
+  - discouraged_optional_boolean
+  - empty_string
+  - empty_xctest_method
+  - explicit_init
+  - force_unwrapping
+  - last_where
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_parameters
+  - number_separator
+  - unused_import
+  - unused_private_declaration
+  - unused_setter_value
+  - yoda_condition
+  
+  # Find all the available rules by running:
+  # swiftlint rules
+included: # paths to include during linting. `--path` is ignored if present.
+  - mCrew
+  - mCrewTests
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
+  - explicit_self
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+nesting: 
+warning: 1
+error: 2
+closure_body_length: 
+force_cast: error # implicitly
+force_try:
+  severity: error # explicitly
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+line_length: 150
+# they can set both implicitly with an array
+type_body_length:
+  - 300 # warning
+  - 400 # error
+# or they can set both explicitly
+file_length:
+  warning: 500
+  error: 1200
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+# identifier_name:
+#   min_length: # only min_length
+#     error: 3 # only error
+#   excluded: # excluded via string array
+#     - id
+#     - ID
+#     - row
+#     - vc
+#     - sku
+#     - dcs
+#     - gai
+#     - sap
+#     - URL
+#     - GlobalAPIKey
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdow

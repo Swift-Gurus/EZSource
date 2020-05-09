@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftyCollection",
+        "repositoryURL": "https://github.com/Swift-Gurus/SwiftyCollection.git",
+        "state": {
+          "branch": null,
+          "revision": "7490578152465ab7a11b4f3f62476b98e4ea4dcd",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "xDiffCollection",
+        "repositoryURL": "https://github.com/Swift-Gurus/xDiffCollection.git",
+        "state": {
+          "branch": null,
+          "revision": "ace0d0e270b690283ec07d703a1cf3210e7923e9",
+          "version": "2.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

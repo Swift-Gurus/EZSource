@@ -1,7 +1,0 @@
-
-apple_id "aldodev@aldogroup.com"
-app_identifier "com.aldo.mFind"
-team_id "MB36D7323X" 
-
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile

@@ -1,6 +1,0 @@
-framework module xDiffCollection {
-  umbrella header "xDiffCollection-umbrella.h"
-
-  export *
-  module * { export * }
-}
