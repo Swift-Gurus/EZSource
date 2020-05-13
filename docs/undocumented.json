@@ -1,0 +1,187 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/Generic/DiffableDataSourceFilter.swift",
+      "line": 54,
+      "symbol": "DiffableDataSourceFilter.init(id:filter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/Generic/DiffableDataSourceFilterProvider.swift",
+      "line": 18,
+      "symbol": "DiffableDataSourceFilterProvider.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 289,
+      "symbol": "DiffableTableViewDataSource.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 293,
+      "symbol": "DiffableTableViewDataSource.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 298,
+      "symbol": "DiffableTableViewDataSource.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 311,
+      "symbol": "DiffableTableViewDataSource.tableView(_:viewForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 315,
+      "symbol": "DiffableTableViewDataSource.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 320,
+      "symbol": "DiffableTableViewDataSource.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 324,
+      "symbol": "DiffableTableViewDataSource.tableView(_:didDeselectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 330,
+      "symbol": "DiffableTableViewDataSource.tableView(_:heightForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 334,
+      "symbol": "DiffableTableViewDataSource.tableView(_:heightForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 344,
+      "symbol": "DiffableTableViewDataSource.tableView(_:leadingSwipeActionsConfigurationForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/DiffableTableViewDataSource.swift",
+      "line": 349,
+      "symbol": "DiffableTableViewDataSource.tableView(_:trailingSwipeActionsConfigurationForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 100,
+      "symbol": "TableViewDiffableSection.settings",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 252,
+      "symbol": "TableViewDiffableSection.HeaderFooterUpdate",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 253,
+      "symbol": "TableViewDiffableSection.HeaderFooterUpdate.new(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 254,
+      "symbol": "TableViewDiffableSection.HeaderFooterUpdate.reuse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 255,
+      "symbol": "TableViewDiffableSection.HeaderFooterUpdate.empty",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/DiffableDataSource/TableView/TableViewDiffableSection.swift",
+      "line": 256,
+      "symbol": "TableViewDiffableSection.HeaderFooterUpdate.default",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/Section/HeaderFooterProvider.swift",
+      "line": 21,
+      "symbol": "SectionHeaderFooterProvider.height",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/Section/HeaderFooterProvider.swift",
+      "line": 22,
+      "symbol": "SectionHeaderFooterProvider.headerView(forTableView:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/Section/HeaderFooterProvider.swift",
+      "line": 36,
+      "symbol": "HeaderFooterProvider.height",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/TableViewRow/ReusableCell.swift",
+      "line": 15,
+      "symbol": "Reusable.reuseID",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/TableViewRow/ReusableCell.swift",
+      "line": 21,
+      "symbol": "Reusable.reuseID",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/TableViewRow/ReusableCell.swift",
+      "line": 31,
+      "symbol": "Configurable.Model",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource/Sources/EZSource/TableViewRow/ReusableCell.swift",
+      "line": 32,
+      "symbol": "Configurable.configure(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/ahmelevski.cg.ide/Developer/SwiftGurus/EZSource"
+}

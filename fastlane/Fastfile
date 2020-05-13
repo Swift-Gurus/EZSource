@@ -15,7 +15,14 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :runTests do
-    run_tests
+    run_tests(workspace: ".swiftpm/xcode/package.xcworkspace",
+              scheme:"EZSource",
+              derived_data_path: "DerivedData")
+  end
+
+  desc "Create docs"
+  lane :makeDocs do 
+    jazzy
   end
 
 #Ending platform :ios do

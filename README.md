@@ -7,91 +7,110 @@
 
 ## Usage
 
-- #### Cells 
-Should conform to the protocols `ReusableCell` and `Configurable`. 
-``` swift
-final class StringCell: UITableViewCell, ReusableCell, Configurable {
-typealias Model = String
-
-    func configure(with text: String) {
-        textLabel?.text = text
-    }
-}
-```
-- #### Source Initialization
-```swift
-let source = TableViewDataSource(tableView: tableView, withTypes: [StringCell.self], reusableViews: [])
-```
-
-- #### Create Rows
-``` swift
-var row = TableViewRow<StringCell>(model: "My Row")
-```
-- #### Creating TableViewSectionUpdate
-   `TableViewSectionUpdate` provides API to config updates for different sections like animations, 
-``` swift
-var updates = TableViewSectionUpdate(sectionID: "\(0)")
-updates.addAddOperation(row , at: IndexPath(row: 0, section: 0))
-source.applyChanges([updates])
-```
-
-## Advanced Usage
-
-#### Add Swipe actions to cells:
-- ##### Create Action
-```swift
-	let action =  RowAction { [weak self] in
-		guard let `self` = self else { return }
-		let alertController = self.alertControllerExample
-		let act = self.dismissAction(for: alertController)
-		alertController.addAction(act)
-		self.present(alertController, animated: true, completion: nil)
-	}
-```
-- ##### Add Action to the Row as tralling or leading
-```swift
-	row.addRowLeadingActions([action])
-	row.addRowTrailingActions([action])
-```
-#### Add Headers/Footers to cells:
-- ##### Create a ReusableView 
-```swift
-final class TestReusableView: UITableViewHeaderFooterView, ReusableView, Configurable {
-
-    typealias Model = String
-
-    func configure(with txt: String) {
-        label.text = txt
-    }
-}
-```
-- ##### Create Header/Footer
-```swift
-let header = ImmutableHeaderFooterProvider<TestReusableView>(model: "Section with text labels")
-let footer = ImmutableHeaderFooterProvider<TestReusableView>(model: "Footer with text labels")
-```
-- ##### Add Header/Footer
-```swift
-section.addHeader(header)
-section.addFooter(footer)
-```
+   The core of `EZSource` for `UITableView`. Provides declarative API to work with `UITableView`
+   All you need is to initialize the source, create rows, add them to section updates and call update function
+   The rest is handled by `EZSource`, next time you have to update the `UITableView`, `EZSource`
+   will find take care about inserting, deleting or reloading rows  using animation provided in the section updates
 
 
+   **Usage Example**
 
-## Example
+   - Define a Cell Model
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+   ````swift
+   struct StringCellModel:  Hashable  {
+     let uniqueID: String
+     let text: String
 
-## Requirements
+     // Defines uniqueness of the model
+     func hash(into hasher: inout Hasher) {
+         hasher.combine(uniqueID)
+     }
 
-## Installation
+     // Defines dynamic context of the model
+     static func == (lhs: Self, rhs: Self) -> Bool {
+         lhs.text == rhs.text
+     }
+   }
+   ````
+   - Define a Cell
 
-EZSource is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+   ````swift
+   final class StringCell: UITableViewCell, ReusableCell, Configurable {
+     typealias Model = StringCellModel
 
-```ruby
-pod 'EZSource'
-```
+     func configure(with model: StringCellModel) {
+         textLabel?.text = "ID: \(model.uniqueID): \(model.text)"
+         selectionStyle = .none
+     }
+   }
+   ````
+   - Create Data Source
+
+   ````swift
+   let config = DiffableTableViewDataSource.Config(tableView: tableView,
+                                                   cellTypes: [StringCell.self],
+                                                   headerFooters: [TestReusableView.self])
+   source = DiffableTableViewDataSource(config: config)
+   ````
+
+   - create a `TableViewRow`
+
+   ````swift
+   let model = StringCellModel(uniqueID: ID, text: title)
+   let row = TableViewRow<StringCell>(model: model,
+                                    onTap: { debugPrint("tapped with \($0)")})
+   // add rows if need
+   row.addRowLeadingActions(leadingActions)
+   row.addRowTrailingActions(trailingActions)
+   ````
+   - Add the row to the cell
+
+   ````swift
+   let updates = TableViewDiffableSection(id: "SectionID here")
+   updates.addRows([row])
+   ````
+   - Create a ReusableView
+
+   ````swift
+   final class TestReusableView: ReusableView, Configurable {
+     
+      let label: UILabel
+      override init(reuseIdentifier: String?) {
+          // Init and Configure UILabel
+
+          super.init(reuseIdentifier: reuseIdentifier)
+      }
+
+      required init?(coder aDecoder: NSCoder) {
+          super.init(coder: aDecoder)
+      }
+     
+      func configure(with txt: String) {
+          label.text = txt
+      }
+   }
+
+   ````
+   - Create a header
+
+   ````swift
+   let text = "My custom section"
+   let footer = ImmutableHeaderFooterProvider<TestReusableView>(model: text)
+   ````
+
+   - Attach the header to a `TableViewDiffableSection`
+
+   ````swift
+   let updates = TableViewDiffableSection(id: "SectionID here")
+   updates.addHeader(header)
+   ````
+
+   - Call updates on the source
+
+   ````swift
+   source.update(sections: [updates])
+   ````
 
 ## Author
 

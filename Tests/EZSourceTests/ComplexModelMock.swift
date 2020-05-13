@@ -17,11 +17,11 @@ struct Address: Equatable {
 struct ComplexModelMock: Hashable {
     let uniqueID: Int
     let address: Address
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(uniqueID)
     }
-    
+
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.address == rhs.address
     }

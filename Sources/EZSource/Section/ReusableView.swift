@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-public protocol AnyView: class {
-    var uiView: UIView { get }
-}
-
-public protocol ReusableView: AnyView, Reusable { }
+/// Convenience typealias that specifies `UITableViewHeaderFooterView`
+/// conforming to `Reusable` protocol
+public typealias ReusableView = UITableViewHeaderFooterView & Reusable

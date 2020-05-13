@@ -16,21 +16,21 @@ final class DiffableDataSourceTester {
     typealias SectionResult = DiffableDataSource.SectionUpdate<AnyHashable, SectionTypeMock>
     var sourceToTest: DiffableDataSource
     let factory = FilterProviderMock()
-    
+
     init() {
         sourceToTest = DiffableDataSource(provider: factory.allPassedProvider)
     }
-    
+
     func emulateUpdate(model: TextModelMock, type: SectionTypeMock) {
         let updates = sectionUpdate(for: type, models: [model])
-        let _ = sourceToTest.update(using: [updates])
+        _ = sourceToTest.update(using: [updates])
     }
-    
+
     func getConfig(request: CaseConfigRequest) -> CaseConfig {
         let updates = sectionUpdate(for: request.section, models: [request.model])
         var sectionUpdate = expectedSectionUpdateResult(for: request.model,
                                                         sectionType: request.section)
-        
+
         sectionUpdate = sectionUpdate.updated(insertedIndexes: request.insertedIndexes)
                                      .updated(updatedIndexes: request.updatedIndexes)
                                      .updated(removedIndexes: request.removedIndexes)
@@ -38,14 +38,13 @@ final class DiffableDataSourceTester {
         return CaseConfig(updatesSectionUpdates: updates, expectedResult: result)
     }
 
-  
     func check_updates_for_models(models: [SectionUpdates],
                                   expectedResut: Result,
                                   file: StaticString = #file,
                                   line: UInt = #line) {
-        
+
         let result = sourceToTest.update(using: models)
-        
+
         XCTAssertEqual(result,
                        expectedResut,
                        file: file,
@@ -53,9 +52,8 @@ final class DiffableDataSourceTester {
     }
 }
 
-
 extension DiffableDataSourceTester {
-    
+
       private func expectedSectionUpdateResult(with updates: [SectionResult]) -> Result {
         .init(insertedIndexes: [], sectionUpdates: updates)
       }
@@ -76,21 +74,19 @@ extension DiffableDataSourceTester {
                 .forEach({ changes.rows.append($0) })
           return changes
       }
-      
-    
+
     struct CaseConfig {
         let updatesSectionUpdates: SectionUpdates
         let expectedResult: Result
     }
-    
-    
+
     struct CaseConfigRequest {
         var insertedIndexes: [IndexPath] = []
         var removedIndexes: [IndexPath] = []
         var updatedIndexes: [IndexPath] = []
         let model: TextModelMock
         let section: SectionTypeMock
-        
+
         init(model: TextModelMock,
              section: SectionTypeMock) {
             self.model = model
@@ -98,5 +94,3 @@ extension DiffableDataSourceTester {
         }
     }
 }
-
-

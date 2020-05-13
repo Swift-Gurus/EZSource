@@ -7,12 +7,13 @@
 //
 
 import Foundation
+
 import UIKit
 @testable import EZSource
 
-final class MockTextReusableCell: UITableViewCell, ReusableCell, Configurable {
+final class MockTextReusableCell: ReusableCell, Configurable {
     typealias Model = TextModelMock
-    
+
     private(set) var models: [TextModelMock] = []
     func configure(with model: TextModelMock) {
         models.append(model)

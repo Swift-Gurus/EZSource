@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 @testable import EZSource
 
-final class MockReusableView: UITableViewHeaderFooterView, ReusableView, Configurable {
+final class MockReusableView: ReusableView, Configurable {
     typealias Model = String
-    
+
     private(set) var models: [String] = []
-    
+
     func configure(with model: String) {
         models.append(model)
     }

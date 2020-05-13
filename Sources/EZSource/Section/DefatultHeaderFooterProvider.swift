@@ -6,15 +6,17 @@
 //
 
 import Foundation
+#if !os(macOS)
 import UIKit
 
 struct DefatultHeaderFooterProvider: SectionHeaderFooterProvider {
-    var title: String? = nil
-    
-    var height: CGFloat? = nil
-    
+    var title: String?
+
+    var height: CGFloat?
+
     func headerView(forTableView: UITableView) -> UIView? {
         return nil
     }
-    
+
 }
+#endif

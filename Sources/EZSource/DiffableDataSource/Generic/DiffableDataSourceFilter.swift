@@ -8,25 +8,49 @@
 import Foundation
 import xDiffCollection
 
-public class DiffableDataSourceFilterProvider {
-    typealias Filter = DiffCollectionFilter<AnyHashable>
-    private(set) var filters: [Filter]  = []
+/**
+    Class adapter to provide section filter. Based on the filter function `DiffableDataSource` decides
+    what goes into a particular section.
+ 
+    -   Generic type `T` stands for type of a model.
+    -   Generic type `S` stands for the unique ID of a Section
     
-    public init() { }
+    **Usage Example**
     
-    public func addFilter<T, S>(_ filter: DiffableDataSourceFilter<T, S>) where T: Hashable, S: Hashable {
-        filters.append(filter.diffCollectionFilter)
+    - Assuming we have the next model:
+ 
+    ````
+    enum TextModelMockType: String {
+        case type1
+        case type2
+        case type3
     }
-}
 
+    /// Type represent unique item
+    /// Text is something that is dynamic and can be changed
+    struct TextModelMock: Hashable {
+        let text: String
+        let type: TextModelMockType
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(type)
+        }
+        
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.text == rhs.text
+        }
+    }
 
+    ````
+ 
+ */
 public final class DiffableDataSourceFilter<T, S> where T: Hashable, S: Hashable {
 
-    public typealias Model = DiffableDataSource.InputModel
+    typealias Model = DiffableDataSource.InputModel
     typealias Filter = DiffCollectionFilter<AnyHashable>
     let id: S
     let filter: ((T) -> Bool)?
-    
+
     public init(id: S, filter: ((T) -> Bool)? = nil) {
         self.filter = filter
         self.id = id
@@ -39,13 +63,13 @@ public final class DiffableDataSourceFilter<T, S> where T: Hashable, S: Hashable
             guard let typeCastedModel = model.base as? Model,
                 let id = typeCastedModel.sectionID.base as? S,
                 let model = typeCastedModel.model.base as? T else { return false }
-            
-            guard let filter = filterFunction else { return filterID == id  }
+
+            guard let filter = filterFunction else { return filterID == id }
             return  filter(model)
         })
     }
-    
-    public struct FilterModel {
+
+    struct FilterModel {
         let model: T
 
     }

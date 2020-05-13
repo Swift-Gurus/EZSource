@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TableViewRow Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/TableViewRow" class="dashAnchor"></a>
+    <a title="TableViewRow Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">EZSource 1.0 Docs</a> (71% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">EZSource Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TableViewRow Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:@M@EZSource@objc(cs)DiffableDataSource">DiffableDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableDataSourceFilter.html">DiffableDataSourceFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableDataSourceFilterProvider.html">DiffableDataSourceFilterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableTableViewDataSource.html">DiffableTableViewDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableTableViewDataSource/Config.html">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GenericSectionUpdate.html">GenericSectionUpdate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ImmutableHeaderFooterProvider.html">ImmutableHeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MutableHeaderFooterProvider.html">MutableHeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RowAction.html">RowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection.html">TableViewDiffableSection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection/HeaderFooterUpdate.html">– HeaderFooterUpdate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection/Settings.html">– Settings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewRow.html">TableViewRow</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Configurable.html">Configurable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Reusable.html">Reusable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionHeaderFooterProvider.html">SectionHeaderFooterProvider</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowAnimationConfig.html">RowAnimationConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionAnimationConfig.html">SectionAnimationConfig</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8EZSource12ReusableCella">ReusableCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8EZSource12ReusableViewa">ReusableView</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TableViewRow</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TableViewRow</span><span class="o">&lt;</span><span class="kt">Cell</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CellProvider</span> <span class="k">where</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Configurable.html">Configurable</a></span><span class="p">,</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Reusable.html">Reusable</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">TableViewRow</span><span class="p">:</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">Cell</span><span class="o">.</span><span class="kt">Model</span><span class="p">:</span> <span class="kt">Hashable</span> <span class="o">&amp;</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>The concept of a generic TableViewCell:</p>
+
+<ul>
+<li>it knows about model it operates with</li>
+<li>contains tap closure that is called when a cell is tapped</li>
+<li>responsible for dequeueing a cell</li>
+<li>provides methods to add leading / trailing actions</li>
+</ul>
+
+<p><strong>Example</strong></p>
+
+<ul>
+<li>Define a Cell Model</li>
+</ul>
+<pre class="highlight swift"><code>  <span class="kd">struct</span> <span class="kt">StringCellModel</span><span class="p">:</span>  <span class="kt">Hashable</span>  <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">String</span>
+      <span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span>
+
+      <span class="c1">// Defines uniqueness of the model</span>
+      <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">hasher</span><span class="o">.</span><span class="nf">combine</span><span class="p">(</span><span class="n">uniqueID</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Defines dynamic context of the model</span>
+      <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+          <span class="n">lhs</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">rhs</span><span class="o">.</span><span class="n">text</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>Define a Cell</li>
+</ul>
+<pre class="highlight swift"><code>  <span class="kd">final</span> <span class="kd">class</span> <span class="kt">StringCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ReusableCell</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+      <span class="kd">typealias</span> <span class="kt">Model</span> <span class="o">=</span> <span class="kt">StringCellModel</span>
+      <span class="k">let</span> <span class="nv">checkmarkView</span> <span class="o">=</span> <span class="kt">UIView</span><span class="p">()</span>
+
+      <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">StringCellModel</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">textLabel</span><span class="p">?</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"ID: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">uniqueID</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">text</span><span class="se">)</span><span class="s">"</span>
+          <span class="n">selectionStyle</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+      <span class="p">}</span>
+
+      <span class="k">override</span> <span class="k">var</span> <span class="nv">isSelected</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+          <span class="k">didSet</span> <span class="p">{</span>
+              <span class="nf">debugPrint</span><span class="p">(</span><span class="n">isSelected</span><span class="p">)</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="k">override</span> <span class="kd">func</span> <span class="nf">prepareForReuse</span><span class="p">()</span> <span class="p">{</span>
+          <span class="n">accessoryType</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+      <span class="p">}</span>
+
+      <span class="k">override</span> <span class="kd">func</span> <span class="nf">setSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">selected</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+
+          <span class="k">if</span> <span class="n">selected</span> <span class="p">{</span>
+             <span class="n">accessoryType</span> <span class="o">=</span> <span class="o">.</span><span class="n">checkmark</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+             <span class="n">accessoryType</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+          <span class="p">}</span>
+          <span class="k">super</span><span class="o">.</span><span class="nf">setSelected</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="n">animated</span><span class="p">)</span>
+
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>create a <code>TableViewRow</code></li>
+</ul>
+<pre class="highlight swift"><code>  <span class="k">let</span> <span class="nv">model</span> <span class="o">=</span> <span class="kt">StringCellModel</span><span class="p">(</span><span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">ID</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">title</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">row</span> <span class="o">=</span> <span class="kt">TableViewRow</span><span class="o">&lt;</span><span class="kt">StringCell</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                                     <span class="nv">onTap</span><span class="p">:</span> <span class="p">{</span> <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"tapped with </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)})</span>
+  <span class="c1">// add rows if need</span>
+  <span class="n">row</span><span class="o">.</span><span class="nf">addRowLeadingActions</span><span class="p">(</span><span class="n">leadingActions</span><span class="p">)</span>
+  <span class="n">row</span><span class="o">.</span><span class="nf">addRowTrailingActions</span><span class="p">(</span><span class="n">trailingActions</span><span class="p">)</span>
+</code></pre>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC5model5ModelAA12ConfigurablePQzvp"></a>
+                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC5model5ModelAA12ConfigurablePQzvp">model</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Model that is used to configure the cell</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kt">Model</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC5model27traillingSwipeConfiguration07leadinggH05onTapACyxG5ModelAA12ConfigurablePQz_AA0d6ActiongH0VANyALcSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(model:traillingSwipeConfiguration:leadingSwipeConfiguration:onTap:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC5model27traillingSwipeConfiguration07leadinggH05onTapACyxG5ModelAA12ConfigurablePQz_AA0d6ActiongH0VANyALcSgtcfc">init(model:<wbr>traillingSwipeConfiguration:<wbr>leadingSwipeConfiguration:<wbr>onTap:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Main constructor</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p><code>traillingSwipeConfiguration</code> and <code>leadingSwipeConfiguration</code> are optional
+arguments, you should use them  if you want to disable long swipe mode on the actions</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kt">Model</span><span class="p">,</span>
+            <span class="nv">traillingSwipeConfiguration</span><span class="p">:</span> <span class="kt"><a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">empty</span> <span class="p">,</span>
+            <span class="nv">leadingSwipeConfiguration</span><span class="p">:</span> <span class="kt"><a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">empty</span><span class="p">,</span>
+            <span class="nv">onTap</span><span class="p">:</span> <span class="p">((</span><span class="kt">Cell</span><span class="o">.</span><span class="kt">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>Cell.Model</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>traillingSwipeConfiguration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>leadingSwipeConfiguration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onTap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>(Cell.Model) -&gt; Void)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC03addD15TrailingActionsyySayAA0D6ActionCGF"></a>
+                    <a name="//apple_ref/swift/Method/addRowTrailingActions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC03addD15TrailingActionsyySayAA0D6ActionCGF">addRowTrailingActions(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Appends trailing actions for the row</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addRowTrailingActions</span><span class="p">(</span><span class="n">_</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RowAction.html">RowAction</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>[<code><a href="../Classes/RowAction.html">RowAction</a></code>]</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC03addD14LeadingActionsyySayAA0D6ActionCGF"></a>
+                    <a name="//apple_ref/swift/Method/addRowLeadingActions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC03addD14LeadingActionsyySayAA0D6ActionCGF">addRowLeadingActions(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>appends leading actions for the row</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addRowLeadingActions</span><span class="p">(</span><span class="n">_</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RowAction.html">RowAction</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>[<code><a href="../Classes/RowAction.html">RowAction</a></code>]</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC05addedD15TrailingActionsyACyxGXDSayAA0D6ActionCGF"></a>
+                    <a name="//apple_ref/swift/Method/addedRowTrailingActions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC05addedD15TrailingActionsyACyxGXDSayAA0D6ActionCGF">addedRowTrailingActions(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Appends trailing actions for the row and returns Self. Usefull for chainig operation</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addedRowTrailingActions</span><span class="p">(</span><span class="n">_</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RowAction.html">RowAction</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>[<code><a href="../Classes/RowAction.html">RowAction</a></code>]</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowC05addedD14LeadingActionsyACyxGXDSayAA0D6ActionCGF"></a>
+                    <a name="//apple_ref/swift/Method/addedRowLeadingActions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowC05addedD14LeadingActionsyACyxGXDSayAA0D6ActionCGF">addedRowLeadingActions(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Appends leading actions for the row and returns Self. Usefull for chainig operation</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addedRowLeadingActions</span><span class="p">(</span><span class="n">_</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/RowAction.html">RowAction</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>[<code><a href="../Classes/RowAction.html">RowAction</a></code>]</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Self</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Cell.Model%60:%20%60Hashable%60%20&amp;%20%60Equatable%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Cell.Model`: `Hashable` &amp; `Equatable`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Cell.Model%60:%20%60Hashable%60%20&amp;%20%60Equatable%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Cell.Model</code>: <code>Hashable</code> &amp; <code>Equatable</code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowCAASH5ModelAA12ConfigurablePRpzrlE2eeoiySbACyxG_AItFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowCAASH5ModelAA12ConfigurablePRpzrlE2eeoiySbACyxG_AItFZ">==(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conformance to <code>Equatable</code> protocol.</p>
+
+<p>Note: Two rows are considered equal if their models are equal</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">TableViewRow</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">TableViewRow</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>TableViewRow&lt;Cell&gt;</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>TableViewRow&lt;Cell&gt;</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Bool</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource12TableViewRowCAASH5ModelAA12ConfigurablePRpzrlE4hash4intoys6HasherVz_tF"></a>
+                    <a name="//apple_ref/swift/Method/hash(into:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource12TableViewRowCAASH5ModelAA12ConfigurablePRpzrlE4hash4intoys6HasherVz_tF">hash(into:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Conformance to Hashable
+uses hash of the model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hasher</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>Hasher</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Alexei Hmelevski</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,15 @@
+# Ordered by output of `jazzy — help config`
+output: docs
+clean: true
+author: Alexei Hmelevski
+module: EZSource
+scheme: EZSource
+# swift_build_tool: spm
+# build_tool_arguments: -Xswiftc,-swift-version,-Xswiftc,5
+# build_tool_arguments: -Xswiftc "-sdk", -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`", -Xswiftc "-target", -Xswiftc "x86_64-apple-ios13.0-simulator"
+module_version: 1.0
+copyright: Alexei Hmelevski
+min_acl: public
+# Options : [apple | fullwidth | jony | DIRPATH]
+# Which theme to use. Specify either ‘apple’ (default), one of the other built-in theme names, or the path to your mustache templates and other assets for a custom theme.Default: apple
+theme: apple

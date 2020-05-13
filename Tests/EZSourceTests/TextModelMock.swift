@@ -14,7 +14,6 @@ enum SectionTypeMock: String {
     case section3
 }
 
-
 enum TextModelMockType: String {
     case type1
     case type2
@@ -26,13 +25,12 @@ enum TextModelMockType: String {
 struct TextModelMock: Hashable {
     let text: String
     let type: TextModelMockType
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(type)
     }
-    
+
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.text == rhs.text
     }
-    
 }

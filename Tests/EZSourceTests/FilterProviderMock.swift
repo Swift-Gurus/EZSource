@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 @testable import EZSource
 
 final class FilterProviderMock {
@@ -29,11 +30,11 @@ extension FilterProviderMock {
            model.text != text
         }
     }
-    
+
     var section2Filter: DiffableDataSourceFilter<ComplexModelMock, SectionTypeMock> {
          DiffableDataSourceFilter(id: .section2)
     }
-    
+
     var section3Filter: DiffableDataSourceFilter<TextModelMock, SectionTypeMock> {
         let text = sectionMoveText
         return DiffableDataSourceFilter(id: .section3) { (model) -> Bool in

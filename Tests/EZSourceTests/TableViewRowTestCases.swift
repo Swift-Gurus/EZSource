@@ -10,36 +10,36 @@ import XCTest
 @testable import EZSource
 
 class TableViewRowTestCases: XCTestCase {
-    
+
     var tester = TableViewRowTester()
-   
+
     override func setUp() {
         super.setUp()
         tester = TableViewRowTester()
     }
-    
-    func test_adds_leading_action() {
+
+    func test_adds_leading_action() throws {
         tester.createAction()
         tester.addIntoLeadingActions()
-        tester.testRowContainsCreatedLeadingAction()
+        try tester.testRowContainsCreatedLeadingAction()
     }
-    
-    func test_adds_trailling_action() {
+
+    func test_adds_trailling_action() throws {
         tester.createAction()
         tester.addIntoTraillingActions()
-        tester.testRowContainsCreatedTraillingAction()
+        try tester.testRowContainsCreatedTraillingAction()
     }
-    
-    func test_recreates_new_row_with_trailling_actions() {
+
+    func test_recreates_new_row_with_trailling_actions() throws {
         tester.createAction()
         tester.recreateRowWithTraillingAction()
-        tester.testRowContainsCreatedTraillingAction()
+        try tester.testRowContainsCreatedTraillingAction()
     }
-    
-    func test_recreates_new_row_with_leading_actions() {
+
+    func test_recreates_new_row_with_leading_actions() throws {
         tester.createAction()
         tester.recreateRowWithLeadingAction()
-        tester.testRowContainsCreatedLeadingAction()
+        try tester.testRowContainsCreatedLeadingAction()
     }
-    
+
 }

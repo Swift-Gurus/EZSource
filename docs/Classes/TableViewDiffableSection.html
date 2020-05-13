@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TableViewDiffableSection Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/TableViewDiffableSection" class="dashAnchor"></a>
+    <a title="TableViewDiffableSection Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">EZSource 1.0 Docs</a> (71% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">EZSource Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TableViewDiffableSection Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:@M@EZSource@objc(cs)DiffableDataSource">DiffableDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableDataSourceFilter.html">DiffableDataSourceFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableDataSourceFilterProvider.html">DiffableDataSourceFilterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableTableViewDataSource.html">DiffableTableViewDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DiffableTableViewDataSource/Config.html">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GenericSectionUpdate.html">GenericSectionUpdate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ImmutableHeaderFooterProvider.html">ImmutableHeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MutableHeaderFooterProvider.html">MutableHeaderFooterProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RowAction.html">RowAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection.html">TableViewDiffableSection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection/HeaderFooterUpdate.html">– HeaderFooterUpdate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDiffableSection/Settings.html">– Settings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewRow.html">TableViewRow</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Configurable.html">Configurable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Reusable.html">Reusable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionHeaderFooterProvider.html">SectionHeaderFooterProvider</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/RowActionSwipeConfiguration.html">RowActionSwipeConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowAnimationConfig.html">RowAnimationConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionAnimationConfig.html">SectionAnimationConfig</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8EZSource12ReusableCella">ReusableCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8EZSource12ReusableViewa">ReusableView</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TableViewDiffableSection</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TableViewDiffableSection</span> <span class="p">:</span> <span class="kt"><a href="../Classes/GenericSectionUpdate.html">GenericSectionUpdate</a></span><span class="o">&lt;</span><span class="kt">AnyHashable</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
+            <p>Represents  changes proposed to a section
+<strong>Example</strong></p>
+
+<ul>
+<li>Define a Cell Model</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">StringCellModel</span><span class="p">:</span>  <span class="kt">Hashable</span>  <span class="p">{</span>
+   <span class="k">let</span> <span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">String</span>
+   <span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span>
+
+   <span class="c1">// Defines uniqueness of the model</span>
+   <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">hasher</span><span class="o">.</span><span class="nf">combine</span><span class="p">(</span><span class="n">uniqueID</span><span class="p">)</span>
+   <span class="p">}</span>
+
+   <span class="c1">// Defines dynamic context of the model</span>
+   <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+       <span class="n">lhs</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">rhs</span><span class="o">.</span><span class="n">text</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>Define a Cell</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">StringCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ReusableCell</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+   <span class="kd">typealias</span> <span class="kt">Model</span> <span class="o">=</span> <span class="kt">StringCellModel</span>
+
+   <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">StringCellModel</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">textLabel</span><span class="p">?</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"ID: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">uniqueID</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">text</span><span class="se">)</span><span class="s">"</span>
+       <span class="n">selectionStyle</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>create a <code><a href="../Classes/TableViewRow.html">TableViewRow</a></code></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">model</span> <span class="o">=</span> <span class="kt">StringCellModel</span><span class="p">(</span><span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">ID</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">title</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">row</span> <span class="o">=</span> <span class="kt">TableViewRow</span><span class="o">&lt;</span><span class="kt">StringCell</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                                  <span class="nv">onTap</span><span class="p">:</span> <span class="p">{</span> <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"tapped with </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)})</span>
+<span class="c1">// add rows if need</span>
+<span class="n">row</span><span class="o">.</span><span class="nf">addRowLeadingActions</span><span class="p">(</span><span class="n">leadingActions</span><span class="p">)</span>
+<span class="n">row</span><span class="o">.</span><span class="nf">addRowTrailingActions</span><span class="p">(</span><span class="n">trailingActions</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Add the row to the cell</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">TableViewDiffableSection</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"SectionID here"</span><span class="p">)</span>
+<span class="n">updates</span><span class="o">.</span><span class="nf">addRows</span><span class="p">([</span><span class="n">row</span><span class="p">])</span>
+</code></pre>
+
+<ul>
+<li>Create a ReusableView</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">TestReusableView</span><span class="p">:</span> <span class="kt">ReusableView</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">UILabel</span>
+    <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="c1">// Init and Configure UILabel</span>
+
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="n">reuseIdentifier</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">coder</span><span class="p">:</span> <span class="n">aDecoder</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">txt</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">txt</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<ul>
+<li>Create a header</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"My custom section"</span>
+<span class="k">let</span> <span class="nv">footer</span> <span class="o">=</span> <span class="kt">ImmutableHeaderFooterProvider</span><span class="o">&lt;</span><span class="kt">TestReusableView</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Attach the header to a <code>TableViewDiffableSection</code></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">TableViewDiffableSection</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"SectionID here"</span><span class="p">)</span>
+<span class="n">updates</span><span class="o">.</span><span class="nf">addHeader</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+</code></pre>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC8settingsAC8SettingsVvp"></a>
+                    <a name="//apple_ref/swift/Property/settings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC8settingsAC8SettingsVvp">settings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">settings</span><span class="p">:</span> <span class="kt"><a href="../Classes/TableViewDiffableSection/Settings.html">Settings</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC7addRowsyySayAA0bC3RowCyxGGSo07UITableC4CellCRbzAA12ConfigurableRzAA8ReusableRzSH5ModelAaKPRpzlF"></a>
+                    <a name="//apple_ref/swift/Method/addRows(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC7addRowsyySayAA0bC3RowCyxGGSo07UITableC4CellCRbzAA12ConfigurableRzAA8ReusableRzSH5ModelAaKPRpzlF">addRows(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><strong>Example</strong></p>
+
+<ul>
+<li>Define a Cell Model</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">StringCellModel</span><span class="p">:</span>  <span class="kt">Hashable</span>  <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="c1">// Defines uniqueness of the model</span>
+    <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">hasher</span><span class="o">.</span><span class="nf">combine</span><span class="p">(</span><span class="n">uniqueID</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Defines dynamic context of the model</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="n">lhs</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">rhs</span><span class="o">.</span><span class="n">text</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>Define a Cell</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">StringCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">ReusableCell</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+    <span class="kd">typealias</span> <span class="kt">Model</span> <span class="o">=</span> <span class="kt">StringCellModel</span>
+
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">StringCellModel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">textLabel</span><span class="p">?</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"ID: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">uniqueID</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">model</span><span class="o">.</span><span class="n">text</span><span class="se">)</span><span class="s">"</span>
+        <span class="n">selectionStyle</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>create a <code><a href="../Classes/TableViewRow.html">TableViewRow</a></code></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">model</span> <span class="o">=</span> <span class="kt">StringCellModel</span><span class="p">(</span><span class="nv">uniqueID</span><span class="p">:</span> <span class="kt">ID</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">title</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">row</span> <span class="o">=</span> <span class="kt">TableViewRow</span><span class="o">&lt;</span><span class="kt">StringCell</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                                   <span class="nv">onTap</span><span class="p">:</span> <span class="p">{</span> <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"tapped with </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)})</span>
+<span class="c1">// add rows if need</span>
+<span class="n">row</span><span class="o">.</span><span class="nf">addRowLeadingActions</span><span class="p">(</span><span class="n">leadingActions</span><span class="p">)</span>
+<span class="n">row</span><span class="o">.</span><span class="nf">addRowTrailingActions</span><span class="p">(</span><span class="n">trailingActions</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Add the row to the cell</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">TableViewDiffableSection</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"SectionID here"</span><span class="p">)</span>
+<span class="n">updates</span><span class="o">.</span><span class="nf">addRows</span><span class="p">([</span><span class="n">row</span><span class="p">])</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addRows</span><span class="o">&lt;</span><span class="kt">Cell</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">rows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/TableViewRow.html">TableViewRow</a></span><span class="o">&lt;</span><span class="kt">Cell</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">where</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">,</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Configurable.html">Configurable</a></span><span class="p">,</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Reusable.html">Reusable</a></span><span class="p">,</span> <span class="kt">Cell</span><span class="o">.</span><span class="kt">Model</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rows</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>[<code><a href="../Classes/TableViewRow.html">TableViewRow&lt;Cell&gt;</a></code>]</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC9addHeaderyyAA0G14FooterProviderCyxGSo07UITablecghC0CRbzAA12ConfigurableRzAA8ReusableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/addHeader(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC9addHeaderyyAA0G14FooterProviderCyxGSo07UITablecghC0CRbzAA12ConfigurableRzAA8ReusableRzlF">addHeader(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Method to add a header  to the section</p>
+
+<p><strong>Usage Example</strong></p>
+
+<ul>
+<li>Create a ReusableView</li>
+</ul>
+<pre class="highlight swift"><code> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TestReusableView</span><span class="p">:</span> <span class="kt">ReusableView</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+
+     <span class="k">let</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">UILabel</span>
+     <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="p">{</span>
+         <span class="c1">// Init and Configure UILabel</span>
+
+         <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="n">reuseIdentifier</span><span class="p">)</span>
+     <span class="p">}</span>
+
+     <span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">coder</span><span class="p">:</span> <span class="n">aDecoder</span><span class="p">)</span>
+     <span class="p">}</span>
+
+     <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">txt</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">txt</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+</code></pre>
+
+<ul>
+<li>Create a header</li>
+</ul>
+<pre class="highlight swift"><code> <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"My custom section"</span>
+ <span class="k">let</span> <span class="nv">footer</span> <span class="o">=</span> <span class="kt">ImmutableHeaderFooterProvider</span><span class="o">&lt;</span><span class="kt">TestReusableView</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Attach the header to a <code>TableViewDiffableSection</code></li>
+</ul>
+<pre class="highlight swift"><code> <span class="k">let</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">TableViewDiffableSection</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"SectionID here"</span><span class="p">)</span>
+ <span class="n">updates</span><span class="o">.</span><span class="nf">addHeader</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addHeader</span><span class="o">&lt;</span><span class="kt">View</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">header</span><span class="p">:</span> <span class="kt"><a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider</a></span><span class="o">&lt;</span><span class="kt">View</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt">UITableViewHeaderFooterView</span><span class="p">,</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Configurable.html">Configurable</a></span><span class="p">,</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Reusable.html">Reusable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>header</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider&lt;View&gt;</a></code>`</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC9addFooteryyAA06HeaderG8ProviderCyxGSo07UITablechgC0CRbzAA12ConfigurableRzAA8ReusableRzlF"></a>
+                    <a name="//apple_ref/swift/Method/addFooter(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC9addFooteryyAA06HeaderG8ProviderCyxGSo07UITablechgC0CRbzAA12ConfigurableRzAA8ReusableRzlF">addFooter(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Method to add a footer to the section</p>
+
+<p><strong>Usage Example</strong></p>
+
+<ul>
+<li>Create a ReusableView</li>
+</ul>
+<pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">TestReusableView</span><span class="p">:</span> <span class="kt">ReusableView</span><span class="p">,</span> <span class="kt">Configurable</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">UILabel</span>
+    <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="c1">// Init and Configure UILabel</span>
+
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="n">reuseIdentifier</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">coder</span><span class="p">:</span> <span class="n">aDecoder</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">txt</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">txt</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<ul>
+<li>Create a header</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"My custom section"</span>
+<span class="k">let</span> <span class="nv">footer</span> <span class="o">=</span> <span class="kt">ImmutableHeaderFooterProvider</span><span class="o">&lt;</span><span class="kt">TestReusableView</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Attach the header to a <code>TableViewDiffableSection</code></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">TableViewDiffableSection</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"SectionID here"</span><span class="p">)</span>
+<span class="n">updates</span><span class="o">.</span><span class="nf">addHeader</span><span class="p">(</span><span class="n">footer</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">addFooter</span><span class="o">&lt;</span><span class="kt">View</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">footer</span><span class="p">:</span> <span class="kt"><a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider</a></span><span class="o">&lt;</span><span class="kt">View</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt">UITableViewHeaderFooterView</span><span class="p">,</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Configurable.html">Configurable</a></span><span class="p">,</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Reusable.html">Reusable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>footer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Classes/HeaderFooterProvider.html">HeaderFooterProvider&lt;View&gt;</a></code>`</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC18HeaderFooterUpdateO"></a>
+                    <a name="//apple_ref/swift/Enum/HeaderFooterUpdate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC18HeaderFooterUpdateO">HeaderFooterUpdate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Classes/TableViewDiffableSection/HeaderFooterUpdate.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HeaderFooterUpdate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8EZSource24TableViewDiffableSectionC8SettingsV"></a>
+                    <a name="//apple_ref/swift/Struct/Settings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8EZSource24TableViewDiffableSectionC8SettingsV">Settings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides settings for the sections like</p>
+
+<ul>
+<li>row animations</li>
+<li>section animations</li>
+<li>header view provider</li>
+<li>footer view provider</li>
+<li>flag is the section is collapsed</li>
+</ul>
+
+                        <a href="../Classes/TableViewDiffableSection/Settings.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Settings</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Alexei Hmelevski</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

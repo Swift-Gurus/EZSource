@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 @testable import EZSource
 
-final class MockReusableCell: UITableViewCell, ReusableCell, Configurable {
+final class MockReusableCell: ReusableCell, Configurable {
     typealias Model = String
-    
+
     private(set) var models: [String] = []
     func configure(with model: String) {
         models.append(model)

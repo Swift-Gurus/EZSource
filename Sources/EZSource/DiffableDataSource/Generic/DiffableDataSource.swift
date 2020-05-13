@@ -8,17 +8,24 @@
 import Foundation
 import xDiffCollection
 
+/**
+    Default `DiffableDataSource` that provides the logic to section provides
+    updates to ` xDiffCollection` that is used as a Backstorage
+    those updates are used by `DiffableTableViewDataSource` to tell `UITableView`
+    what to reload,insert or delete
+ 
+ */
 public class DiffableDataSource: NSObject {
-    
-    public typealias Index = IndexPath
+
+    typealias Index = IndexPath
     typealias Filter = DiffCollectionFilter<AnyHashable>
     var xDiffCollection: DiffCollection<AnyHashable>
-    
-    public var numberOfSections: Int {
+
+    var numberOfSections: Int {
         xDiffCollection.count
     }
-    
-    public func numberOfElements(at index: Int) -> Int {
+
+    func numberOfElements(at index: Int) -> Int {
         xDiffCollection.numberOfElements(at: index)
     }
 
@@ -26,7 +33,7 @@ public class DiffableDataSource: NSObject {
         xDiffCollection = DiffCollection<AnyHashable>(filters: provider.filters)
         super.init()
     }
-     
+
     func element<T>(at path: IndexPath) -> T? {
         xDiffCollection.element(at: path.section)
                        .map({ $0.element(at: path.row) })
@@ -34,33 +41,33 @@ public class DiffableDataSource: NSObject {
                        .flatMap({ $0 as? InputModel })
                        .flatMap({ $0.model.base  as? T })
     }
-    
+
     @discardableResult
-    func update<T, S>(using models: [GenericSectionUpdate<T, S>]) -> SourceUpdate<T,S> {
+    func update<T, S>(using models: [GenericSectionUpdate<T, S>]) -> SourceUpdate<T, S> {
         let indexes = createSourceIfNeed(ids: models)
-        
+
         let updates: [SectionUpdate<T, S>] = models.flatMap(convert)
                                                    .compactMap(self.update)
                                                    .compactMap({ $0 })
-        
+
         return SourceUpdate(insertedIndexes: indexes, sectionUpdates: updates)
     }
-    
+
     private func createSourceIfNeed<T, S>(ids: [GenericSectionUpdate<T, S>]) -> [Int] {
         guard numberOfSections == 0 else { return [] }
         let filters = createDefaultFilters(for: ids)
-        xDiffCollection = .init(filters: filters.map({ $0.diffCollectionFilter} ))
+        xDiffCollection = .init(filters: filters.map({ $0.diffCollectionFilter }))
         return stride(from: 0, to: ids.count, by: 1).map({ $0 })
     }
-     
-    private func createDefaultFilters<T,S>(for ids: [GenericSectionUpdate<T, S>]) -> [DiffableDataSourceFilter<T, S>] {
+
+    private func createDefaultFilters<T, S>(for ids: [GenericSectionUpdate<T, S>]) -> [DiffableDataSourceFilter<T, S>] {
         ids.map({ $0.id }).map({ DiffableDataSourceFilter(id: $0) })
     }
-    
+
     private func convert<T, S>(section: GenericSectionUpdate<T, S>) -> [InputModel] where T: Hashable, S: Hashable {
         section.rows.map({ InputModel(sectionID: section.id, model: $0) })
     }
-    
+
     func update<T, S>(with item: InputModel) -> SectionUpdate<T, S>? {
         let erasedModel = AnyHashable(item)
         let snapshot = xDiffCollection.update(with: erasedModel)
@@ -73,25 +80,24 @@ public class DiffableDataSource: NSObject {
                 let sectionID = item.sectionID.base as? S else {
                 return nil
         }
-        
+
         return SectionUpdate(insertedIndexes: changes.addedIndexes,
                              removedIndexes: changes.removedIndexes,
                              updatedIndexes: changes.updatedIndexes,
                              model: model,
                              id: sectionID)
     }
-    
+
 }
 
 extension DiffableDataSource {
-    public struct InputModel: Hashable {
+     struct InputModel: Hashable {
         let sectionID: AnyHashable
         let model: AnyHashable
-        
-        public func hash(into hasher: inout Hasher) {
+
+        func hash(into hasher: inout Hasher) {
             hasher.combine(model)
         }
-    
     }
 }
 
@@ -104,10 +110,10 @@ extension DiffableDataSource {
         let model: T
         let id: S
     }
-    
+
     struct SourceUpdate<T, S>: Equatable  where T: Hashable, S: Hashable {
         let insertedIndexes: [Int]
-        let sectionUpdates: [SectionUpdate<T,S>]
+        let sectionUpdates: [SectionUpdate<T, S>]
     }
 
     enum Operation {

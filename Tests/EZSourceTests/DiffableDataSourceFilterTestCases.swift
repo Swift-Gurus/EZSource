@@ -29,7 +29,7 @@ class DiffableDataSourceFilterTestCases: XCTestCase {
         }
         XCTAssertTrue(dFilter.filter(inputModel))
     }
-    
+
     func test_returns_false() {
         let sectionID = "SectionID"
         let inputModel = self.inputModel(for: sectionID)
@@ -42,17 +42,16 @@ class DiffableDataSourceFilterTestCases: XCTestCase {
     private var defaultModel: TextModelMock {
         TextModelMock(text: "Text", type: .type1)
     }
-    
+
     private func inputModel(for sectionID: String) -> InputModel {
         return InputModel(sectionID: sectionID,
                           model: AnyHashable(defaultModel))
     }
-    
+
     private func sectionFilter(id: String, comparison: @escaping Comparison) -> Filter {
         .init(id: id, filter: comparison)
     }
-    
-    
+
     private func diffFilter(id: String,
                             comparison: @escaping Comparison) ->  DiffCollectionFilter<AnyHashable> {
         let filter = sectionFilter(id: id, comparison: comparison)
