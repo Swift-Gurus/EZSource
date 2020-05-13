@@ -1,9 +1,9 @@
 # EZSource
 
 [![Build Status](https://app.bitrise.io/app/d32979af27c37da9/status.svg?token=-IhedTB5j9wMx1S8cYLRaA&branch=master)](https://app.bitrise.io/app/d32979af27c37da9)
-
 [![License](https://img.shields.io/cocoapods/l/EZSource.svg?style=flat)](https://cocoapods.org/pods/EZSource)
 [![Platform](https://img.shields.io/cocoapods/p/EZSource.svg?style=flat)](https://cocoapods.org/pods/EZSource)
+
 [![Documentation](https://swift-gurus.github.io/EZSource/badge.svg)](https://swift-gurus.github.io/EZSource)
 
 ## Usage
